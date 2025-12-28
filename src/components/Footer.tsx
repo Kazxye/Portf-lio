@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
+import { useLanguage } from '../i18n';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className="py-8 border-t border-border">
@@ -31,7 +33,7 @@ const Footer = () => {
             className="text-text-secondary hover:text-accent transition-colors text-sm"
             whileHover={{ y: -2 }}
           >
-            Voltar ao topo ↑
+            {t.footer.backToTop} ↑
           </motion.a>
         </motion.div>
       </div>

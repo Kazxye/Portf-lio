@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin, MapPin, Send, Phone } from 'lucide-react';
+import { useLanguage } from '../i18n';
 
 // Ícone customizado do Discord
 const DiscordIcon = ({ size = 24 }: { size?: number }) => (
@@ -8,28 +9,30 @@ const DiscordIcon = ({ size = 24 }: { size?: number }) => (
   </svg>
 );
 
-const contactLinks = [
-  {
-    icon: Github,
-    label: 'GitHub',
-    value: '@Kazxye',
-    href: 'https://github.com/Kazxye',
-  },
-  {
-    icon: Linkedin,
-    label: 'LinkedIn',
-    value: '/in/kazystatarunas',
-    href: 'https://www.linkedin.com/in/kazystatarunas/',
-  },
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'kazysdzigan...@outlook.com',
-    href: 'mailto:kazysdzigantatarunas@outlook.com',
-  },
-];
-
 const Contact = () => {
+  const { t } = useLanguage();
+
+  const contactLinks = [
+    {
+      icon: Github,
+      label: 'GitHub',
+      value: '@Kazxye',
+      href: 'https://github.com/Kazxye',
+    },
+    {
+      icon: Linkedin,
+      label: 'LinkedIn',
+      value: '/in/kazystatarunas',
+      href: 'https://www.linkedin.com/in/kazystatarunas/',
+    },
+    {
+      icon: Mail,
+      label: 'Email',
+      value: 'kazysdzigan...@outlook.com',
+      href: 'mailto:kazysdzigantatarunas@outlook.com',
+    },
+  ];
+
   return (
     <section id="contact" className="py-32 relative">
       <div className="max-w-5xl mx-auto px-6">
@@ -48,14 +51,13 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            Contato
+            {t.contact.label}
           </motion.span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-text-primary mt-4 mb-6">
-            Vamos <span className="text-gradient">Conversar</span>?
+            {t.contact.title} <span className="text-gradient">{t.contact.titleHighlight}</span>?
           </h2>
           <p className="text-text-secondary max-w-xl mx-auto">
-            Estou sempre aberto a novas oportunidades, colaborações em projetos 
-            interessantes ou simplesmente trocar uma ideia sobre tecnologia.
+            {t.contact.description}
           </p>
         </motion.div>
 
@@ -139,7 +141,7 @@ const Contact = () => {
           transition={{ delay: 0.5, duration: 0.6 }}
         >
           <MapPin size={16} className="text-accent" />
-          <span className="text-sm">São Paulo, Brasil</span>
+          <span className="text-sm">{t.contact.location}</span>
         </motion.div>
 
         {/* CTA */}
@@ -155,7 +157,7 @@ const Contact = () => {
             className="inline-flex items-center gap-3 px-8 py-4 bg-accent hover:bg-accent-dark text-white font-semibold rounded-xl transition-all duration-300 glow-accent-hover"
           >
             <Send size={20} />
-            Enviar Mensagem
+            {t.contact.sendMessage}
           </a>
         </motion.div>
       </div>

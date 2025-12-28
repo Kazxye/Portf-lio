@@ -1,49 +1,52 @@
 import { motion } from 'framer-motion';
 import { Code2, Shield, Gamepad2, GraduationCap } from 'lucide-react';
-
-const skills = [
-  {
-    category: 'Linguagens',
-    items: ['Python', 'C', 'C++', 'TypeScript', 'JavaScript'],
-  },
-  {
-    category: 'Frontend',
-    items: ['React', 'Tailwind CSS', 'HTML/CSS', 'Framer Motion'],
-  },
-  {
-    category: 'Backend & Tools',
-    items: ['Node.js', 'Git', 'Linux', 'Discord API'],
-  },
-  {
-    category: 'Interesses',
-    items: ['Cybersecurity', 'Gaming Tools', 'Reverse Engineering', 'OSINT'],
-  },
-];
-
-const highlights = [
-  {
-    icon: GraduationCap,
-    title: 'Engenharia de Software',
-    description: 'Estudante na FIAP, com previsão de formatura em 2028. Focado em construir uma base sólida em desenvolvimento.',
-  },
-  {
-    icon: Shield,
-    title: 'Cybersecurity',
-    description: 'Interesse profundo em ethical hacking, análise de vulnerabilidades e proteção de sistemas.',
-  },
-  {
-    icon: Gamepad2,
-    title: 'Ferramentas para Jogos',
-    description: 'Desenvolvimento de ferramentas de auxílio e monitoramento para diversos jogos.',
-  },
-  {
-    icon: Code2,
-    title: 'Código Limpo',
-    description: 'Comprometido com boas práticas, documentação clara e código que outros desenvolvedores podem entender.',
-  },
-];
+import { useLanguage } from '../i18n';
 
 const About = () => {
+  const { t } = useLanguage();
+
+  const skills = [
+    {
+      category: t.about.skillCategories.languages,
+      items: ['Python', 'C', 'C++', 'TypeScript', 'JavaScript'],
+    },
+    {
+      category: t.about.skillCategories.frontend,
+      items: ['React', 'Tailwind CSS', 'HTML/CSS', 'Framer Motion'],
+    },
+    {
+      category: t.about.skillCategories.backend,
+      items: ['Node.js', 'Git', 'Linux', 'Discord API'],
+    },
+    {
+      category: t.about.skillCategories.interests,
+      items: ['Cybersecurity', 'Gaming Tools', 'Reverse Engineering', 'OSINT'],
+    },
+  ];
+
+  const highlights = [
+    {
+      icon: GraduationCap,
+      title: t.about.highlights.software.title,
+      description: t.about.highlights.software.description,
+    },
+    {
+      icon: Shield,
+      title: t.about.highlights.security.title,
+      description: t.about.highlights.security.description,
+    },
+    {
+      icon: Gamepad2,
+      title: t.about.highlights.gaming.title,
+      description: t.about.highlights.gaming.description,
+    },
+    {
+      icon: Code2,
+      title: t.about.highlights.code.title,
+      description: t.about.highlights.code.description,
+    },
+  ];
+
   return (
     <section id="about" className="py-32 relative bg-surface/50">
       <div className="max-w-6xl mx-auto px-6">
@@ -62,10 +65,10 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            Sobre Mim
+            {t.about.label}
           </motion.span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-text-primary mt-4 mb-6">
-            Quem é <span className="text-gradient">Kazys</span>?
+            {t.about.title} <span className="text-gradient">{t.about.titleHighlight}</span>?
           </h2>
         </motion.div>
 
@@ -79,19 +82,13 @@ const About = () => {
             transition={{ duration: 0.6 }}
           >
             <p className="text-text-secondary leading-relaxed mb-6">
-              Sou um estudante de Engenharia de Software na FIAP, atualmente no terceiro semestre, 
-              com uma paixão genuína por entender como as coisas funcionam — especialmente quando 
-              envolve código, segurança e games.
+              {t.about.bio1}
             </p>
             <p className="text-text-secondary leading-relaxed mb-6">
-              Minha jornada na programação começou com curiosidade e evoluiu para projetos 
-              práticos que combinam meus interesses: desde ferramentas para jogos 
-              até estudos de segurança da informação.
+              {t.about.bio2}
             </p>
             <p className="text-text-secondary leading-relaxed">
-              Acredito que a melhor forma de aprender é construindo. Cada projeto que desenvolvo 
-              é uma oportunidade de explorar novas tecnologias, resolver problemas reais e 
-              contribuir para a comunidade.
+              {t.about.bio3}
             </p>
           </motion.div>
 
@@ -128,7 +125,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
         >
           <h3 className="font-display text-2xl font-bold text-text-primary text-center mb-10">
-            Stack & Habilidades
+            {t.about.skillsTitle}
           </h3>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Sparkles } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
+import { useLanguage } from '../i18n';
 import profileImage from '../assets/profile.png';
 
 const useTypewriter = (text: string, speed: number = 150, delay: number = 1000) => {
   const [displayText, setDisplayText] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
+    setDisplayText('');
+    setShowCursor(true);
+    
     const startDelay = setTimeout(() => {
-      setIsTyping(true);
       let currentIndex = 0;
 
       const typeInterval = setInterval(() => {
@@ -19,8 +21,6 @@ const useTypewriter = (text: string, speed: number = 150, delay: number = 1000) 
           currentIndex++;
         } else {
           clearInterval(typeInterval);
-          setIsTyping(false);
-          // Cursor pisca por mais um tempo depois de terminar
           setTimeout(() => setShowCursor(false), 2000);
         }
       }, speed);
@@ -31,11 +31,13 @@ const useTypewriter = (text: string, speed: number = 150, delay: number = 1000) 
     return () => clearTimeout(startDelay);
   }, [text, speed, delay]);
 
-  return { displayText, isTyping, showCursor };
+  return { displayText, showCursor };
 };
 
 const Hero = () => {
+  const { t } = useLanguage();
   const { displayText, showCursor } = useTypewriter('Kazys', 180, 800);
+
   return (
     <section
       id="home"
@@ -61,9 +63,8 @@ const Hero = () => {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-gradient mb-8"
             >
-              <Sparkles size={14} className="text-accent" />
               <span className="text-sm text-text-secondary font-medium">
-                Disponível para projetos
+                {t.hero.badge}
               </span>
             </motion.div>
 
@@ -74,7 +75,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              Olá, eu sou o
+              {t.hero.greeting}
               <br />
               <span className="text-gradient">
                 {displayText}
@@ -91,7 +92,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              Software Engineering Student
+              {t.hero.role}
             </motion.p>
 
             {/* Description */}
@@ -101,9 +102,8 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              Entusiasta de <span className="text-accent">cybersecurity</span> e{' '}
-              <span className="text-accent">engenharia de software</span>. Transformando
-              ideias em código que faz a diferença.
+              {t.hero.description} <span className="text-accent">{t.hero.skill1}</span> e{' '}
+              <span className="text-accent">{t.hero.skill2}</span>{t.hero.descriptionEnd}
             </motion.p>
 
             {/* CTA Buttons */}
@@ -119,7 +119,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Ver Projetos
+                {t.hero.viewProjects}
               </motion.a>
               <motion.a
                 href="#contact"
@@ -127,7 +127,7 @@ const Hero = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Entre em Contato
+                {t.hero.contact}
               </motion.a>
             </motion.div>
           </motion.div>
@@ -175,7 +175,7 @@ const Hero = () => {
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
+            <span className="text-xs uppercase tracking-widest">{t.hero.scroll}</span>
             <ArrowDown size={20} />
           </motion.a>
         </motion.div>

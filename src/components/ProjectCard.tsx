@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, Github, X, Shield, Gamepad2 } from 'lucide-react';
+import { useLanguage } from '../i18n';
 
 interface Project {
   id: string;
@@ -21,6 +22,7 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { t } = useLanguage();
 
   const getCategoryIcon = () => {
     switch (project.category) {
@@ -57,7 +59,9 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           {/* Category Badge */}
           <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 glass rounded-full">
             <span className="text-accent">{getCategoryIcon()}</span>
-            <span className="text-xs text-text-secondary capitalize">{project.category}</span>
+            <span className="text-xs text-text-secondary capitalize">
+              {t.projects.categories[project.category]}
+            </span>
           </div>
         </div>
 
@@ -139,7 +143,9 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                   <div>
                     <div className="flex items-center gap-3 mb-2">
                       <span className="text-accent">{getCategoryIcon()}</span>
-                      <span className="text-sm text-text-muted capitalize">{project.category}</span>
+                      <span className="text-sm text-text-muted capitalize">
+                        {t.projects.categories[project.category]}
+                      </span>
                     </div>
                     <h2 className="font-display text-3xl font-bold text-text-primary">
                       {project.title}
@@ -156,7 +162,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                 {project.highlights.length > 0 && (
                   <div className="mb-6">
                     <h4 className="text-sm font-semibold text-text-primary mb-3 uppercase tracking-wider">
-                      Destaques
+                      {t.projects.highlights}
                     </h4>
                     <ul className="space-y-2">
                       {project.highlights.map((highlight, index) => (
@@ -172,7 +178,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                 {/* Tags */}
                 <div className="mb-8">
                   <h4 className="text-sm font-semibold text-text-primary mb-3 uppercase tracking-wider">
-                    Tecnologias
+                    {t.projects.technologies}
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
@@ -196,7 +202,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                       className="flex items-center gap-2 px-6 py-3 bg-surface-light hover:bg-border text-text-primary rounded-xl transition-colors"
                     >
                       <Github size={18} />
-                      <span className="font-medium">Ver Código</span>
+                      <span className="font-medium">{t.projects.viewCode}</span>
                     </a>
                   )}
                   {project.liveUrl && (
@@ -207,7 +213,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                       className="flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-dark text-white rounded-xl transition-colors"
                     >
                       <ExternalLink size={18} />
-                      <span className="font-medium">Ver Projeto</span>
+                      <span className="font-medium">{t.projects.viewProject}</span>
                     </a>
                   )}
                 </div>
