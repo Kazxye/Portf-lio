@@ -66,6 +66,18 @@ export const translations = {
           'Ideal para estudantes de cybersecurity entenderem vetores de ataque',
         ],
       },
+      networkRadar: {
+        shortDescription: 'Sistema fullstack de monitoramento de rede em tempo real com dashboard interativo e detecção de dispositivos.',
+        fullDescription: 'Aplicação completa para descoberta e monitoramento de dispositivos na rede local. Utiliza técnicas de escaneamento ARP/ICMP para identificar hosts ativos, exibindo informações detalhadas como IP, MAC, fabricante e latência em um dashboard moderno com atualizações em tempo real via WebSocket.',
+        highlights: [
+          'Escaneamento de rede via ARP e ICMP com Scapy',
+          'Dashboard em tempo real com React e WebSocket',
+          'Identificação automática de fabricantes via MAC address',
+          'Monitoramento de latência e status dos dispositivos',
+          'API REST com FastAPI e validação via Pydantic',
+          'Interface responsiva com visualização de topologia',
+        ],
+      },
     },
 
     // About
@@ -184,6 +196,18 @@ export const translations = {
           'Fully documented code for learning purposes',
           'Developed following ethical hacking principles',
           'Ideal for cybersecurity students to understand attack vectors',
+        ],
+      },
+      networkRadar: {
+        shortDescription: 'Fullstack real-time network monitoring system with interactive dashboard and device detection.',
+        fullDescription: 'Complete application for discovering and monitoring devices on the local network. Uses ARP/ICMP scanning techniques to identify active hosts, displaying detailed information such as IP, MAC, manufacturer, and latency in a modern dashboard with real-time updates via WebSocket.',
+        highlights: [
+          'Network scanning via ARP and ICMP with Scapy',
+          'Real-time dashboard with React and WebSocket',
+          'Automatic manufacturer identification via MAC address',
+          'Device latency and status monitoring',
+          'REST API with FastAPI and Pydantic validation',
+          'Responsive interface with topology visualization',
         ],
       },
     },
