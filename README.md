@@ -4,7 +4,7 @@ Meu portfólio pessoal desenvolvido com React, TypeScript e Tailwind CSS.
 
 🌐 **[kazys.dev](https://kazys.dev)** (em breve)
 
-## ✨ Features
+## Features
 
 - **Design moderno** - Dark mode com tema roxo e animações suaves
 - **Bilíngue** - Suporte completo PT-BR / EN com toggle no header
