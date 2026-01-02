@@ -8,15 +8,15 @@ const About = () => {
   const skills = [
     {
       category: t.about.skillCategories.languages,
-      items: ['Python', 'C', 'C++', 'TypeScript', 'JavaScript'],
+      items: ['Python', 'C', 'C++', 'TypeScript'],
     },
     {
       category: t.about.skillCategories.frontend,
-      items: ['React', 'Tailwind CSS', 'HTML/CSS', 'Framer Motion'],
+      items: ['React', 'Tailwind CSS', 'Framer Motion'],
     },
     {
       category: t.about.skillCategories.backend,
-      items: ['Node.js', 'Git', 'Linux', 'Discord API'],
+      items: ['FastAPI', 'Node.js', 'Git', 'Discord API'],
     },
     {
       category: t.about.skillCategories.interests,
@@ -132,23 +132,34 @@ const About = () => {
             {skills.map((skillGroup, groupIndex) => (
               <motion.div
                 key={skillGroup.category}
-                className="p-6 glass rounded-xl border-gradient"
+                className="p-6 glass rounded-xl border-gradient cursor-default"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: groupIndex * 0.1, duration: 0.5 }}
+                whileHover={{ 
+                  y: -5,
+                  transition: { duration: 0.2 }
+                }}
               >
                 <h4 className="font-mono text-accent text-sm uppercase tracking-wider mb-4">
                   {skillGroup.category}
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {skillGroup.items.map((skill) => (
-                    <span
+                    <motion.span
                       key={skill}
-                      className="px-3 py-1.5 text-sm text-text-secondary bg-surface-light rounded-lg"
+                      className="px-3 py-1.5 text-sm text-text-secondary bg-surface-light rounded-lg cursor-default"
+                      whileHover={{ 
+                        scale: 1.05, 
+                        backgroundColor: 'rgba(139, 92, 246, 0.15)',
+                        color: '#a78bfa',
+                        transition: { duration: 0.15 }
+                      }}
+                      whileTap={{ scale: 0.95 }}
                     >
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </motion.div>
