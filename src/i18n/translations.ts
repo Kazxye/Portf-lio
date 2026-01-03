@@ -29,16 +29,29 @@ export const translations = {
       titleHighlight: 'Destaque',
       description: 'Uma seleção dos meus trabalhos mais recentes em desenvolvimento de software, com foco em soluções criativas para gaming e segurança da informação.',
       moreComingSoon: 'Mais projetos em breve...',
-      viewMore: 'Ver mais projetos',
+      viewMore: 'Ver todos os projetos',
       viewCode: 'Ver Código',
       viewProject: 'Ver Projeto',
       highlights: 'Destaques',
       technologies: 'Tecnologias',
+      allProjects: 'Todos os Projetos',
+      filterAll: 'Todos',
       categories: {
         security: 'security',
         gaming: 'gaming',
         web: 'web',
+        tools: 'tools',
       },
+    },
+
+    // Updates
+    updates: {
+      label: 'Changelog',
+      title: 'Atualizações',
+      titleHighlight: 'Recentes',
+      newProject: 'Novo projeto',
+      update: 'Atualização',
+      launch: 'Lançamento',
     },
 
     // Project Details
@@ -89,6 +102,18 @@ export const translations = {
           'Análise de URLs com múltiplos algoritmos de verificação',
           'Compatível com Chrome, Edge e navegadores Chromium',
           'Arquitetura modular e bem documentada',
+        ],
+      },
+      dllInjector: {
+        shortDescription: 'Ferramenta avançada para injeção de DLLs em processos Windows com interface moderna.',
+        fullDescription: 'Ferramenta desenvolvida para fins educacionais que demonstra técnicas de injeção de DLL em processos Windows. Utiliza métodos como LoadLibrary e Manual Mapping, com uma interface gráfica moderna e intuitiva. Ideal para estudantes de segurança e engenharia reversa entenderem como funcionam técnicas de injeção de código.',
+        highlights: [
+          'Múltiplos métodos de injeção (LoadLibrary, Manual Mapping)',
+          'Interface gráfica moderna e intuitiva',
+          'Seleção de processos em tempo real',
+          'Desenvolvido em C++ com Win32 API',
+          'Código documentado para fins educacionais',
+          'Ideal para estudos de engenharia reversa',
         ],
       },
     },
@@ -174,16 +199,29 @@ export const translations = {
       titleHighlight: 'Projects',
       description: 'A selection of my most recent work in software development, focusing on creative solutions for gaming and information security.',
       moreComingSoon: 'More projects coming soon...',
-      viewMore: 'View more projects',
+      viewMore: 'View all projects',
       viewCode: 'View Code',
       viewProject: 'View Project',
       highlights: 'Highlights',
       technologies: 'Technologies',
+      allProjects: 'All Projects',
+      filterAll: 'All',
       categories: {
         security: 'security',
         gaming: 'gaming',
         web: 'web',
+        tools: 'tools',
       },
+    },
+
+    // Updates
+    updates: {
+      label: 'Changelog',
+      title: 'Recent',
+      titleHighlight: 'Updates',
+      newProject: 'New project',
+      update: 'Update',
+      launch: 'Launch',
     },
 
     // Project Details
@@ -234,6 +272,18 @@ export const translations = {
           'URL analysis with multiple verification algorithms',
           'Compatible with Chrome, Edge and Chromium browsers',
           'Modular and well-documented architecture',
+        ],
+      },
+      dllInjector: {
+        shortDescription: 'Advanced tool for DLL injection into Windows processes with modern interface.',
+        fullDescription: 'Tool developed for educational purposes that demonstrates DLL injection techniques in Windows processes. Uses methods like LoadLibrary and Manual Mapping, with a modern and intuitive graphical interface. Ideal for security and reverse engineering students to understand how code injection techniques work.',
+        highlights: [
+          'Multiple injection methods (LoadLibrary, Manual Mapping)',
+          'Modern and intuitive graphical interface',
+          'Real-time process selection',
+          'Developed in C++ with Win32 API',
+          'Documented code for educational purposes',
+          'Ideal for reverse engineering studies',
         ],
       },
     },

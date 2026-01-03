@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Shield, Gamepad2, Github, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight, Shield, Gamepad2, Wrench, Github, X, ArrowRight } from 'lucide-react';
 import { useLanguage } from '../i18n';
-import lootLoggerImage from '../assets/lootlogger.png';
-import ethicalStealerImage from '../assets/ethicalstealer.png';
-import networkRadarImage from '../assets/networkradar.png';
-import phishGuardImage from '../assets/phishguard.png';
+import { getFeaturedProjects, ProjectCategory } from '../data/projects';
 
 const Projects = () => {
   const { t } = useLanguage();
@@ -14,52 +12,7 @@ const Projects = () => {
   const [direction, setDirection] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const projects = [
-    {
-      id: 'phish-guard',
-      title: 'PhishGuard',
-      shortDescription: t.projectDetails.phishGuard.shortDescription,
-      fullDescription: t.projectDetails.phishGuard.fullDescription,
-      image: phishGuardImage,
-      tags: ['Python', 'FastAPI', 'TypeScript', 'Browser Extension', 'REST API'],
-      githubUrl: 'https://github.com/Kazxye/PhishGuard',
-      category: 'security' as const,
-      highlights: t.projectDetails.phishGuard.highlights,
-    },
-    {
-      id: 'network-radar',
-      title: 'Network Radar',
-      shortDescription: t.projectDetails.networkRadar.shortDescription,
-      fullDescription: t.projectDetails.networkRadar.fullDescription,
-      image: networkRadarImage,
-      tags: ['React', 'TypeScript', 'FastAPI', 'Scapy', 'WebSocket', 'Pydantic'],
-      githubUrl: 'https://github.com/Kazxye/Network-Radar',
-      category: 'security' as const,
-      highlights: t.projectDetails.networkRadar.highlights,
-    },
-    {
-      id: 'loot-logger',
-      title: 'Loot Logger',
-      shortDescription: t.projectDetails.lootLogger.shortDescription,
-      fullDescription: t.projectDetails.lootLogger.fullDescription,
-      image: lootLoggerImage,
-      tags: ['Python', 'Scapy', 'CustomTkinter', 'Discord API', 'Threading'],
-      githubUrl: 'https://github.com/Kazxye/Loot-Logger-Albion-Online',
-      category: 'gaming' as const,
-      highlights: t.projectDetails.lootLogger.highlights,
-    },
-    {
-      id: 'ethical-stealer',
-      title: 'Ethical Stealer',
-      shortDescription: t.projectDetails.ethicalStealer.shortDescription,
-      fullDescription: t.projectDetails.ethicalStealer.fullDescription,
-      image: ethicalStealerImage,
-      tags: ['Python', 'Discord API', 'System Analysis', 'Network', 'Security Research'],
-      githubUrl: 'https://github.com/Kazxye/Ethical-Stealer',
-      category: 'security' as const,
-      highlights: t.projectDetails.ethicalStealer.highlights,
-    },
-  ];
+  const projects = getFeaturedProjects();
 
   const navigate = (newDirection: number) => {
     if (isAnimating) return;
@@ -84,12 +37,14 @@ const Projects = () => {
     return (currentIndex + offset + projects.length) % projects.length;
   };
 
-  const getCategoryIcon = (category: string) => {
+  const getCategoryIcon = (category: ProjectCategory) => {
     switch (category) {
       case 'security':
         return <Shield size={14} />;
       case 'gaming':
         return <Gamepad2 size={14} />;
+      case 'tools':
+        return <Wrench size={14} />;
       default:
         return null;
     }
@@ -97,7 +52,19 @@ const Projects = () => {
 
   const currentProject = projects[currentIndex];
 
-  // Animação principal do card
+  // Get translations for current project
+  const getProjectTranslation = (key: string) => {
+    const details = t.projectDetails as Record<string, {
+      shortDescription: string;
+      fullDescription: string;
+      highlights: string[];
+    }>;
+    return details[key];
+  };
+
+  const projectTranslation = getProjectTranslation(currentProject.translationKey);
+
+  // Animation variants
   const cardVariants = {
     enter: (direction: number) => ({
       x: direction > 0 ? 400 : -400,
@@ -119,7 +86,6 @@ const Projects = () => {
     }),
   };
 
-  // Animação dos cards laterais
   const sideCardVariants = {
     initial: (side: 'left' | 'right') => ({
       opacity: 0,
@@ -138,21 +104,13 @@ const Projects = () => {
     },
   };
 
-  // Animação das setas
   const arrowVariants = {
     initial: { scale: 1 },
     hover: { 
       scale: 1.15,
-      transition: { 
-        type: 'spring',
-        stiffness: 400,
-        damping: 10,
-      },
+      transition: { type: 'spring', stiffness: 400, damping: 10 },
     },
-    tap: { 
-      scale: 0.9,
-      transition: { duration: 0.1 },
-    },
+    tap: { scale: 0.9, transition: { duration: 0.1 } },
   };
 
   return (
@@ -242,10 +200,7 @@ const Projects = () => {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={{ 
-                    duration: 0.6, 
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   className="cursor-pointer"
                   onClick={() => setIsModalOpen(true)}
                 >
@@ -293,7 +248,7 @@ const Projects = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.4 }}
                       >
-                        {currentProject.shortDescription}
+                        {projectTranslation?.shortDescription}
                       </motion.p>
 
                       {/* Tags */}
@@ -377,7 +332,6 @@ const Projects = () => {
               }`}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
-              aria-label={`Go to project ${index + 1}`}
             />
           ))}
         </div>
@@ -394,6 +348,26 @@ const Projects = () => {
             <span className="mx-2 text-border">/</span>
             <span>{String(projects.length).padStart(2, '0')}</span>
           </p>
+        </motion.div>
+
+        {/* View All Projects Link */}
+        <motion.div
+          className="mt-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+        >
+          <Link to="/projects">
+            <motion.span
+              className="inline-flex items-center gap-2 px-6 py-3 text-text-secondary hover:text-accent transition-colors duration-300 font-medium group"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>{t.projects.viewMore}</span>
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </motion.span>
+          </Link>
         </motion.div>
       </div>
 
@@ -430,7 +404,6 @@ const Projects = () => {
                 className="absolute top-4 right-4 p-2 text-text-muted hover:text-text-primary bg-surface/80 backdrop-blur-sm hover:bg-surface-light rounded-full transition-colors z-10 border border-border/50"
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
-                aria-label="Fechar"
               >
                 <X size={20} />
               </motion.button>
@@ -447,34 +420,28 @@ const Projects = () => {
 
               {/* Content */}
               <div className="p-8">
-                {/* Header */}
-                <div className="flex items-start justify-between mb-6">
-                  <div>
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="text-accent">{getCategoryIcon(currentProject.category)}</span>
-                      <span className="text-sm text-text-muted capitalize">
-                        {t.projects.categories[currentProject.category]}
-                      </span>
-                    </div>
-                    <h2 className="font-display text-3xl font-bold text-text-primary">
-                      {currentProject.title}
-                    </h2>
-                  </div>
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-accent">{getCategoryIcon(currentProject.category)}</span>
+                  <span className="text-sm text-text-muted capitalize">
+                    {t.projects.categories[currentProject.category]}
+                  </span>
                 </div>
+                <h2 className="font-display text-3xl font-bold text-text-primary mb-4">
+                  {currentProject.title}
+                </h2>
 
-                {/* Description */}
                 <p className="text-text-secondary leading-relaxed mb-6">
-                  {currentProject.fullDescription}
+                  {projectTranslation?.fullDescription}
                 </p>
 
                 {/* Highlights */}
-                {currentProject.highlights.length > 0 && (
+                {projectTranslation?.highlights && (
                   <div className="mb-6">
                     <h4 className="text-sm font-semibold text-text-primary mb-3 uppercase tracking-wider">
                       {t.projects.highlights}
                     </h4>
                     <ul className="space-y-2">
-                      {currentProject.highlights.map((highlight, index) => (
+                      {projectTranslation.highlights.map((highlight, index) => (
                         <motion.li 
                           key={index} 
                           className="flex items-start gap-3 text-text-secondary text-sm"
@@ -508,47 +475,22 @@ const Projects = () => {
                 </div>
 
                 {/* Links */}
-                <div className="flex gap-4">
-                  {currentProject.githubUrl && (
-                    <motion.a
-                      href={currentProject.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-6 py-3 bg-surface-light hover:bg-border text-text-primary rounded-xl transition-colors"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Github size={18} />
-                      <span className="font-medium">{t.projects.viewCode}</span>
-                    </motion.a>
-                  )}
-                </div>
+                <motion.a
+                  href={currentProject.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-surface-light hover:bg-border text-text-primary rounded-xl transition-colors"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Github size={18} />
+                  <span className="font-medium">{t.projects.viewCode}</span>
+                </motion.a>
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Ver mais projetos */}
-      <motion.div
-        className="mt-12 text-center"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.3 }}
-      >
-        <motion.a
-          href="https://github.com/Kazxye?tab=repositories"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 text-text-secondary hover:text-accent transition-colors duration-300 font-medium"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <span>{t.projects.viewMore}</span>
-          <Github size={18} />
-        </motion.a>
-      </motion.div>
     </section>
   );
 };

@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Github, Linkedin, Menu, X, Globe } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Github, Linkedin, Menu, X, Globe, Bell, Calendar, FolderPlus, RefreshCw, Rocket } from 'lucide-react';
 import { useLanguage } from '../i18n';
+import { updates, UpdateType } from '../data/updates';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isChangelogOpen, setIsChangelogOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const changelogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,6 +17,17 @@ const Header = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close changelog when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (changelogRef.current && !changelogRef.current.contains(event.target as Node)) {
+        setIsChangelogOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const navItems = [
@@ -31,6 +45,29 @@ const Header = () => {
   const toggleLanguage = () => {
     setLanguage(language === 'pt-BR' ? 'en' : 'pt-BR');
   };
+
+  const getUpdateIcon = (type: UpdateType) => {
+    switch (type) {
+      case 'newProject':
+        return <FolderPlus size={14} />;
+      case 'update':
+        return <RefreshCw size={14} />;
+      case 'launch':
+        return <Rocket size={14} />;
+      default:
+        return <FolderPlus size={14} />;
+    }
+  };
+
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString(language === 'pt-BR' ? 'pt-BR' : 'en-US', {
+      day: '2-digit',
+      month: '2-digit',
+    });
+  };
+
+  const recentUpdates = updates.slice(0, 5);
 
   return (
     <motion.header
@@ -72,8 +109,8 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* Social Links + Language Toggle */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Social Links + Changelog + Language Toggle */}
+        <div className="hidden md:flex items-center gap-2">
           {socialLinks.map((social, index) => (
             <motion.a
               key={social.label}
@@ -91,6 +128,85 @@ const Header = () => {
               <social.icon size={20} />
             </motion.a>
           ))}
+          
+          {/* Changelog Button */}
+          <div className="relative" ref={changelogRef}>
+            <motion.button
+              onClick={() => setIsChangelogOpen(!isChangelogOpen)}
+              className="relative p-2 text-text-secondary hover:text-accent transition-all duration-300 hover:bg-surface-light rounded-lg"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.55, duration: 0.5 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Changelog"
+            >
+              <Bell size={20} />
+              {/* New indicator dot */}
+              <span className="absolute top-1 right-1 w-2 h-2 bg-accent rounded-full animate-pulse" />
+            </motion.button>
+
+            {/* Changelog Dropdown */}
+            <AnimatePresence>
+              {isChangelogOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute right-0 top-full mt-2 w-80 bg-surface border border-border rounded-xl shadow-2xl shadow-background/50 overflow-hidden"
+                >
+                  {/* Header */}
+                  <div className="px-4 py-3 border-b border-border bg-surface-light">
+                    <h3 className="font-display font-semibold text-text-primary text-sm">
+                      {t.updates.title} {t.updates.titleHighlight}
+                    </h3>
+                  </div>
+
+                  {/* Updates List */}
+                  <div className="max-h-80 overflow-y-auto">
+                    {recentUpdates.map((update, index) => (
+                      <motion.div
+                        key={update.id}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.05 }}
+                        className={`px-4 py-3 border-b border-border/50 last:border-b-0 hover:bg-surface-light transition-colors ${
+                          index === 0 ? 'bg-accent/5' : ''
+                        }`}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className={`p-1.5 rounded-lg ${
+                            index === 0 ? 'bg-accent/20 text-accent' : 'bg-surface-light text-text-muted'
+                          }`}>
+                            {getUpdateIcon(update.type)}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className={`text-sm font-medium truncate ${
+                              index === 0 ? 'text-text-primary' : 'text-text-secondary'
+                            }`}>
+                              {language === 'pt-BR' ? update.titlePt : update.titleEn}
+                            </p>
+                            <div className="flex items-center gap-2 mt-1">
+                              <Calendar size={10} className="text-text-muted" />
+                              <span className="text-xs text-text-muted">
+                                {formatDate(update.date)} • {update.time}
+                              </span>
+                            </div>
+                          </div>
+                          {index === 0 && (
+                            <span className="px-1.5 py-0.5 text-[10px] font-bold bg-accent text-white rounded">
+                              NEW
+                            </span>
+                          )}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
           
           {/* Language Toggle */}
           <motion.button
@@ -153,6 +269,14 @@ const Header = () => {
                 <social.icon size={20} />
               </a>
             ))}
+            <button
+              onClick={() => setIsChangelogOpen(!isChangelogOpen)}
+              className="relative p-2 text-text-secondary hover:text-accent transition-colors"
+              aria-label="Changelog"
+            >
+              <Bell size={20} />
+              <span className="absolute top-0 right-0 w-2 h-2 bg-accent rounded-full" />
+            </button>
             <button
               onClick={toggleLanguage}
               className="flex items-center gap-2 px-3 py-2 text-text-secondary hover:text-accent transition-colors text-sm font-medium"
