@@ -11,12 +11,13 @@ export const translations = {
     // Hero
     hero: {
       badge: 'Buscando oportunidades',
-      greeting: 'Olá, eu sou',
+      greeting: 'Olá, eu sou o',
       role: 'Software Engineering Student',
       description: 'Entusiasta de',
       skill1: 'cybersecurity',
+      connector: 'e',
       skill2: 'engenharia de software',
-      descriptionEnd: '. Transformando ideias em código que faz a diferença.',
+      descriptionEnd: '. Transformando ideias em códigos que fazem a diferença.',
       viewProjects: 'Ver Projetos',
       contact: 'Entre em Contato',
       scroll: 'Scroll',
@@ -185,6 +186,7 @@ export const translations = {
       role: 'Software Engineering Student',
       description: 'Enthusiast of',
       skill1: 'cybersecurity',
+      connector: 'and',
       skill2: 'software engineering',
       descriptionEnd: '. Turning ideas into code that makes a difference.',
       viewProjects: 'View Projects',

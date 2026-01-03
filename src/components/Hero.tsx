@@ -102,7 +102,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              {t.hero.description} <span className="text-accent">{t.hero.skill1}</span> e{' '}
+              {t.hero.description} <span className="text-accent">{t.hero.skill1}</span> {t.hero.connector}{' '}
               <span className="text-accent">{t.hero.skill2}</span>{t.hero.descriptionEnd}
             </motion.p>
 
