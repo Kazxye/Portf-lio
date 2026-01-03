@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="src/assets/profile.png" width="120" style="border-radius: 50%;" alt="Kazys" />
-</p>
-
 <h1 align="center">Kazys - Portfolio</h1>
 
 <p align="center">
@@ -22,7 +18,7 @@
 
 ---
 
-## ✨ Features
+## Features
 
 - **Design Moderno** — Dark mode com tema roxo (#8b5cf6) e animações suaves
 - **Bilíngue** — Suporte completo PT-BR / EN com toggle no header
