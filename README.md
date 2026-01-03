@@ -18,7 +18,7 @@
 
 ---
 
-## ✨ Features
+## Features
 
 - **Design Moderno** — Dark mode com tema roxo (#8b5cf6) e animações suaves
 - **Bilíngue** — Suporte completo PT-BR / EN com toggle no header
