@@ -1,58 +1,28 @@
 import { motion } from 'framer-motion';
-import { Code2, Shield, Gamepad2, GraduationCap } from 'lucide-react';
+import { Code2, Shield, Gamepad2, GraduationCap, Terminal, Cpu, Zap } from 'lucide-react';
 import { useLanguage } from '../i18n';
 
 const About = () => {
   const { t } = useLanguage();
 
-  const skills = [
-    {
-      category: t.about.skillCategories.languages,
-      items: ['Python', 'C', 'C++', 'TypeScript'],
-    },
-    {
-      category: t.about.skillCategories.frontend,
-      items: ['React', 'Tailwind CSS', 'Framer Motion'],
-    },
-    {
-      category: t.about.skillCategories.backend,
-      items: ['FastAPI', 'Node.js', 'Git', 'Discord API'],
-    },
-    {
-      category: t.about.skillCategories.interests,
-      items: ['Cybersecurity', 'Gaming Tools', 'Reverse Engineering', 'OSINT'],
-    },
-  ];
+  const skills = {
+    languages: ['Python', 'C', 'C++', 'TypeScript'],
+    frontend: ['React', 'Tailwind CSS', 'Framer Motion'],
+    backend: ['FastAPI', 'Node.js', 'Git', 'Discord API'],
+    interests: ['Cybersecurity', 'Gaming Tools', 'Reverse Engineering', 'OSINT'],
+  };
 
-  const highlights = [
-    {
-      icon: GraduationCap,
-      title: t.about.highlights.software.title,
-      description: t.about.highlights.software.description,
-    },
-    {
-      icon: Shield,
-      title: t.about.highlights.security.title,
-      description: t.about.highlights.security.description,
-    },
-    {
-      icon: Gamepad2,
-      title: t.about.highlights.gaming.title,
-      description: t.about.highlights.gaming.description,
-    },
-    {
-      icon: Code2,
-      title: t.about.highlights.code.title,
-      description: t.about.highlights.code.description,
-    },
-  ];
+  const allSkills = [...skills.languages, ...skills.frontend, ...skills.backend];
 
   return (
-    <section id="about" className="py-32 relative bg-surface/50">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="about" className="py-32 relative overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute top-1/2 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -translate-y-1/2" />
+      
+      <div className="max-w-6xl mx-auto px-6 relative">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -67,105 +37,174 @@ const About = () => {
           >
             {t.about.label}
           </motion.span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-text-primary mt-4 mb-6">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-text-primary mt-4">
             {t.about.title} <span className="text-gradient">{t.about.titleHighlight}</span>?
           </h2>
         </motion.div>
 
-        {/* Bio + Highlights */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
-          {/* Bio */}
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          
+          {/* Bio - Span 2 columns */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            className="md:col-span-2 lg:col-span-2 p-8 rounded-2xl bg-gradient-to-br from-surface to-surface/50 border border-border/50"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
-            <p className="text-text-secondary leading-relaxed mb-6">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span className="text-accent font-mono text-sm">about.me</span>
+            </div>
+            <p className="text-text-secondary leading-relaxed mb-4">
               {t.about.bio1}
             </p>
-            <p className="text-text-secondary leading-relaxed mb-6">
+            <p className="text-text-secondary leading-relaxed mb-4">
               {t.about.bio2}
             </p>
-            <p className="text-text-secondary leading-relaxed">
+            <p className="text-text-muted leading-relaxed text-sm">
               {t.about.bio3}
             </p>
           </motion.div>
 
-          {/* Highlights Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {highlights.map((item, index) => (
-              <motion.div
-                key={item.title}
-                className="p-6 bg-surface rounded-xl border border-border hover:border-accent/30 transition-colors"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-              >
-                <div className="w-10 h-10 flex items-center justify-center rounded-lg bg-accent/10 text-accent mb-4">
-                  <item.icon size={20} />
-                </div>
-                <h3 className="font-display font-semibold text-text-primary mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-text-muted text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+          {/* FIAP Card */}
+          <motion.div
+            className="p-6 rounded-2xl bg-surface border border-border/50 flex flex-col justify-between"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            whileHover={{ y: -5, transition: { duration: 0.2 } }}
+          >
+            <div>
+              <GraduationCap className="text-accent mb-4" size={28} />
+              <h3 className="font-display text-xl font-semibold text-text-primary mb-2">
+                {t.about.highlights.software.title}
+              </h3>
+              <p className="text-text-muted text-sm leading-relaxed">
+                {t.about.highlights.software.description}
+              </p>
+            </div>
+            <div className="mt-6 pt-4 border-t border-border/50">
+              <span className="text-xs font-mono text-text-muted">2024 - 2028</span>
+            </div>
+          </motion.div>
 
-        {/* Skills */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h3 className="font-display text-2xl font-bold text-text-primary text-center mb-10">
-            {t.about.skillsTitle}
-          </h3>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {skills.map((skillGroup, groupIndex) => (
+          {/* Left Column - Security + Gaming stacked */}
+          <div className="flex flex-col gap-4 md:gap-6">
+            {/* Security Focus */}
+            <motion.div
+              className="flex-1 p-6 rounded-2xl bg-gradient-to-br from-accent/10 to-transparent border border-accent/20"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            >
+              <Shield className="text-accent mb-4" size={28} />
+              <h3 className="font-display text-lg font-semibold text-text-primary mb-2">
+                {t.about.highlights.security.title}
+              </h3>
+              <p className="text-text-muted text-sm leading-relaxed">
+                {t.about.highlights.security.description}
+              </p>
+            </motion.div>
+
+            {/* Gaming Tools */}
+            <motion.div
+              className="flex-1 p-6 rounded-2xl bg-surface border border-border/50 relative overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
+            >
+              <div className="absolute top-0 right-0 w-20 h-20 bg-accent/5 rounded-full blur-2xl" />
+              <Gamepad2 className="text-accent mb-4" size={28} />
+              <h3 className="font-display text-lg font-semibold text-text-primary mb-2">
+                {t.about.highlights.gaming.title}
+              </h3>
+              <p className="text-text-muted text-sm leading-relaxed">
+                {t.about.highlights.gaming.description}
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Skills Cloud - Span 2 columns */}
+          <motion.div
+            className="md:col-span-1 lg:col-span-2 p-8 rounded-2xl bg-surface border border-border/50"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <Terminal className="text-accent" size={20} />
+              <span className="text-text-primary font-semibold">{t.about.skillsTitle}</span>
+            </div>
+            
+            <div className="flex flex-wrap gap-2">
+              {allSkills.map((skill, index) => (
+                <motion.span
+                  key={skill}
+                  className="px-4 py-2 text-sm text-text-secondary bg-surface-light hover:bg-accent/10 hover:text-accent rounded-full border border-border/50 hover:border-accent/30 transition-all duration-200 cursor-default"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 + index * 0.03, duration: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+
+            {/* Interests as subtle tags */}
+            <div className="mt-6 pt-6 border-t border-border/30">
+              <span className="text-xs font-mono text-text-muted uppercase tracking-wider mb-3 block">
+                {t.about.skillCategories.interests}
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {skills.interests.map((interest) => (
+                  <span
+                    key={interest}
+                    className="px-3 py-1 text-xs text-accent/70 bg-accent/5 rounded-full"
+                  >
+                    {interest}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Stats Row - Full width */}
+          <motion.div
+            className="md:col-span-2 lg:col-span-3 grid grid-cols-2 md:grid-cols-4 gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            {[
+              { icon: Code2, value: '5+', label: t.about.stats?.projects || 'Projetos' },
+              { icon: Cpu, value: '4+', label: t.about.stats?.languages || 'Linguagens' },
+              { icon: Shield, value: '4+', label: t.about.stats?.tools || 'Security Tools' },
+              { icon: Zap, value: '2026', label: t.about.stats?.learning || 'Sempre aprendendo' },
+            ].map((stat) => (
               <motion.div
-                key={skillGroup.category}
-                className="p-6 glass rounded-xl border-gradient cursor-default"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: groupIndex * 0.1, duration: 0.5 }}
-                whileHover={{ 
-                  y: -5,
-                  transition: { duration: 0.2 }
-                }}
+                key={stat.label}
+                className="p-4 rounded-xl bg-surface/50 border border-border/30 text-center"
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
               >
-                <h4 className="font-mono text-accent text-sm uppercase tracking-wider mb-4">
-                  {skillGroup.category}
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {skillGroup.items.map((skill) => (
-                    <motion.span
-                      key={skill}
-                      className="px-3 py-1.5 text-sm text-text-secondary bg-surface-light rounded-lg cursor-default"
-                      whileHover={{ 
-                        scale: 1.05, 
-                        backgroundColor: 'rgba(139, 92, 246, 0.15)',
-                        color: '#a78bfa',
-                        transition: { duration: 0.15 }
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
-                </div>
+                <stat.icon className="text-accent mx-auto mb-2" size={20} />
+                <div className="text-2xl font-bold text-text-primary font-mono">{stat.value}</div>
+                <div className="text-xs text-text-muted">{stat.label}</div>
               </motion.div>
             ))}
-          </div>
-        </motion.div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );

@@ -152,6 +152,12 @@ export const translations = {
         backend: 'Backend & Tools',
         interests: 'Interesses',
       },
+      stats: {
+        projects: 'Projetos',
+        languages: 'Linguagens',
+        tools: 'Security Tools',
+        learning: 'Sempre aprendendo',
+      },
     },
 
     // Contact
@@ -322,6 +328,12 @@ export const translations = {
         frontend: 'Frontend',
         backend: 'Backend & Tools',
         interests: 'Interests',
+      },
+      stats: {
+        projects: 'Projects',
+        languages: 'Languages',
+        tools: 'Security Tools',
+        learning: 'Always learning',
       },
     },
 
