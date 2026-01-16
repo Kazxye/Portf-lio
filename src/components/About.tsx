@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Code2, Shield, Gamepad2, GraduationCap, Terminal, Cpu, Zap } from 'lucide-react';
+import { Shield, Gamepad2, GraduationCap, Terminal } from 'lucide-react';
 import { useLanguage } from '../i18n';
 
 const About = () => {
@@ -176,32 +176,6 @@ const About = () => {
                 ))}
               </div>
             </div>
-          </motion.div>
-
-          {/* Stats Row - Full width */}
-          <motion.div
-            className="md:col-span-2 lg:col-span-3 grid grid-cols-2 md:grid-cols-4 gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            {[
-              { icon: Code2, value: '5+', label: t.about.stats?.projects || 'Projetos' },
-              { icon: Cpu, value: '4+', label: t.about.stats?.languages || 'Linguagens' },
-              { icon: Shield, value: '4+', label: t.about.stats?.tools || 'Security Tools' },
-              { icon: Zap, value: '2026', label: t.about.stats?.learning || 'Sempre aprendendo' },
-            ].map((stat) => (
-              <motion.div
-                key={stat.label}
-                className="p-4 rounded-xl bg-surface/50 border border-border/30 text-center"
-                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-              >
-                <stat.icon className="text-accent mx-auto mb-2" size={20} />
-                <div className="text-2xl font-bold text-text-primary font-mono">{stat.value}</div>
-                <div className="text-xs text-text-muted">{stat.label}</div>
-              </motion.div>
-            ))}
           </motion.div>
 
         </div>
