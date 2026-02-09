@@ -3,8 +3,9 @@ import ethicalStealerImage from '../assets/ethicalstealer.png';
 import networkRadarImage from '../assets/networkradar.png';
 import phishGuardImage from '../assets/phishguard.png';
 import dllInjectorImage from '../assets/dllinjector.png';
+import solarHubImage from '../assets/solarhub.png';
 
-export type ProjectCategory = 'security' | 'gaming' | 'tools';
+export type ProjectCategory = 'security' | 'gaming' | 'tools' | 'web';
 
 export interface Project {
   id: string;
@@ -12,13 +13,28 @@ export interface Project {
   image: string;
   tags: string[];
   githubUrl: string;
+  liveUrl?: string;
   category: ProjectCategory;
   featured: boolean;
   dateAdded: string;
   translationKey: string;
+  isClientWork?: boolean;
 }
 
 export const projects: Project[] = [
+  {
+    id: 'solar-hub',
+    title: 'SolarHub',
+    image: solarHubImage,
+    tags: ['Next.js', 'React 19', 'TypeScript', 'Tailwind CSS v4', 'Vercel'],
+    githubUrl: 'https://github.com/Kazxye/SolarHub',
+    liveUrl: 'https://v0-solar-hub-tau.vercel.app',
+    category: 'web',
+    featured: true,
+    dateAdded: '2026-02-09',
+    translationKey: 'solarHub',
+    isClientWork: true,
+  },
   {
     id: 'dll-injector',
     title: 'DLL Injector',

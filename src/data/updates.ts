@@ -13,6 +13,16 @@ export interface Update {
 
 export const updates: Update[] = [
   {
+    id: '7',
+    date: '2026-02-09',
+    time: '15:00',
+    type: 'newProject',
+    titlePt: 'SolarHub — Projeto para cliente',
+    titleEn: 'SolarHub — Client project',
+    descriptionPt: 'Frontend comercial com Next.js 16 + React 19. Em desenvolvimento.',
+    descriptionEn: 'Commercial frontend with Next.js 16 + React 19. In development.',
+  },
+  {
     id: '6',
     date: '2026-01-03',
     time: '03:30',
