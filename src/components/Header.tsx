@@ -20,7 +20,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close changelog when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -35,7 +34,6 @@ const Header = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Close mobile menu when changelog opens
   const handleChangelogClick = () => {
     setIsMobileMenuOpen(false);
     setIsChangelogOpen(!isChangelogOpen);
@@ -59,14 +57,10 @@ const Header = () => {
 
   const getUpdateIcon = (type: UpdateType) => {
     switch (type) {
-      case 'newProject':
-        return <FolderPlus size={14} />;
-      case 'update':
-        return <RefreshCw size={14} />;
-      case 'launch':
-        return <Rocket size={14} />;
-      default:
-        return <FolderPlus size={14} />;
+      case 'newProject': return <FolderPlus size={14} />;
+      case 'update': return <RefreshCw size={14} />;
+      case 'launch': return <Rocket size={14} />;
+      default: return <FolderPlus size={14} />;
     }
   };
 
@@ -80,23 +74,19 @@ const Header = () => {
 
   const recentUpdates = updates.slice(0, 5);
 
-  // Changelog dropdown component
   const ChangelogDropdown = ({ isMobile = false }: { isMobile?: boolean }) => (
     <motion.div
       initial={{ opacity: 0, y: 10, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 10, scale: 0.95 }}
       transition={{ duration: 0.2 }}
-      className={`${isMobile ? 'fixed left-4 right-4 top-20' : 'absolute right-0 top-full mt-2 w-80'} bg-surface border border-border rounded-xl shadow-2xl shadow-background/80 overflow-hidden z-[60]`}
+      className={`${isMobile ? 'fixed left-4 right-4 top-20' : 'absolute right-0 top-full mt-3 w-80'} bg-surface border border-border rounded-2xl shadow-2xl shadow-background/80 overflow-hidden z-[60]`}
     >
-      {/* Header */}
       <div className="px-4 py-3 border-b border-border bg-surface-light">
         <h3 className="font-display font-semibold text-text-primary text-sm">
           {t.updates.title} {t.updates.titleHighlight}
         </h3>
       </div>
-
-      {/* Updates List */}
       <div className="max-h-80 overflow-y-auto">
         {recentUpdates.map((update, index) => (
           <motion.div
@@ -145,168 +135,177 @@ const Header = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled 
-            ? 'py-4 bg-background/90 backdrop-blur-xl' 
-            : 'py-6'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6"
       >
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-          {/* Logo */}
-          <motion.a
-            href="#home"
-            className="font-display text-2xl font-bold tracking-tight"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="text-gradient">K</span>
-            <span className="text-text-primary">azys</span>
-            <span className="text-accent">.</span>
-          </motion.a>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navItems.map((item, index) => (
-              <motion.a
-                key={item.href}
-                href={item.href}
-                className="text-text-secondary hover:text-text-primary transition-colors duration-300 text-sm font-medium link-hover"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index, duration: 0.5 }}
-              >
-                {item.label}
-              </motion.a>
-            ))}
-          </nav>
-
-          {/* Social Links + Changelog + Language Toggle */}
-          <div className="hidden md:flex items-center gap-2">
-            {socialLinks.map((social, index) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 text-text-secondary hover:text-accent transition-all duration-300 hover:bg-surface-light rounded-lg"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + 0.1 * index, duration: 0.5 }}
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label={social.label}
-              >
-                <social.icon size={20} />
-              </motion.a>
-            ))}
-            
-            {/* Changelog Button - Desktop */}
-            <div className="relative" ref={changelogRef}>
-              <motion.button
-                onClick={() => setIsChangelogOpen(!isChangelogOpen)}
-                className="relative p-2 text-text-secondary hover:text-accent transition-all duration-300 hover:bg-surface-light rounded-lg"
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.55, duration: 0.5 }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                aria-label="Changelog"
-              >
-                <Bell size={20} />
-                <span className="absolute top-1 right-1 w-2 h-2 bg-accent rounded-full animate-pulse" />
-              </motion.button>
-
-              {/* Desktop Changelog Dropdown */}
-              <AnimatePresence>
-                {isChangelogOpen && <ChangelogDropdown />}
-              </AnimatePresence>
-            </div>
-            
-            {/* Language Toggle */}
-            <motion.button
-              onClick={toggleLanguage}
-              className="flex items-center gap-2 px-3 py-2 text-text-secondary hover:text-accent transition-all duration-300 hover:bg-surface-light rounded-lg text-sm font-medium"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
+        {/* Floating Pill Container */}
+        <div
+          className={`max-w-5xl mx-auto mt-4 transition-all duration-500 rounded-2xl ${
+            isScrolled
+              ? 'bg-surface/70 backdrop-blur-2xl border border-border/60 shadow-lg shadow-background/40'
+              : 'bg-surface/40 backdrop-blur-xl border border-border/30'
+          }`}
+        >
+          <div className="px-5 py-3 flex items-center justify-between">
+            {/* Logo */}
+            <motion.a
+              href="#home"
+              className="font-display text-xl font-bold tracking-tight"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              aria-label="Toggle language"
             >
-              <Globe size={18} />
-              <span>{language === 'pt-BR' ? 'EN' : 'PT'}</span>
+              <span className="text-gradient">K</span>
+              <span className="text-text-primary">azys</span>
+              <span className="text-accent">.</span>
+            </motion.a>
+
+            {/* Desktop Navigation — Center */}
+            <nav className="hidden md:flex items-center gap-1 bg-background/40 rounded-xl px-1.5 py-1">
+              {navItems.map((item, index) => (
+                <motion.a
+                  key={item.href}
+                  href={item.href}
+                  className="px-4 py-1.5 text-text-secondary hover:text-text-primary hover:bg-surface-light rounded-lg transition-all duration-200 text-sm font-medium"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index, duration: 0.5 }}
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+            </nav>
+
+            {/* Right Side Actions */}
+            <div className="hidden md:flex items-center gap-1">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 text-text-muted hover:text-accent transition-all duration-200 hover:bg-surface-light rounded-lg"
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.4 + 0.1 * index, duration: 0.5 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label={social.label}
+                >
+                  <social.icon size={18} />
+                </motion.a>
+              ))}
+
+              {/* Divider */}
+              <div className="w-px h-5 bg-border/50 mx-1" />
+
+              {/* Changelog */}
+              <div className="relative" ref={changelogRef}>
+                <motion.button
+                  onClick={() => setIsChangelogOpen(!isChangelogOpen)}
+                  className="relative p-2 text-text-muted hover:text-accent transition-all duration-200 hover:bg-surface-light rounded-lg"
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.55, duration: 0.5 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  aria-label="Changelog"
+                >
+                  <Bell size={18} />
+                  <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-accent rounded-full animate-pulse" />
+                </motion.button>
+
+                <AnimatePresence>
+                  {isChangelogOpen && <ChangelogDropdown />}
+                </AnimatePresence>
+              </div>
+
+              {/* Language Toggle */}
+              <motion.button
+                onClick={toggleLanguage}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 text-text-muted hover:text-accent transition-all duration-200 hover:bg-surface-light rounded-lg text-sm font-medium"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Toggle language"
+              >
+                <Globe size={16} />
+                <span className="text-xs font-mono">{language === 'pt-BR' ? 'EN' : 'PT'}</span>
+              </motion.button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              className="md:hidden p-2 text-text-secondary hover:text-text-primary rounded-lg hover:bg-surface-light transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Menu"
+            >
+              {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </motion.button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            className="md:hidden p-2 text-text-secondary hover:text-text-primary"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            whileTap={{ scale: 0.9 }}
-            aria-label="Menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
-        </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden bg-surface/95 backdrop-blur-xl mt-4 mx-6 rounded-xl border border-border"
-            >
-              <nav className="flex flex-col p-6 gap-4">
-                {navItems.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className="text-text-secondary hover:text-text-primary transition-colors duration-300 text-lg font-medium"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-                <div className="flex items-center gap-4 pt-4 border-t border-border">
-                  {socialLinks.map((social) => (
+          {/* Mobile Menu — Inside the pill */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="md:hidden overflow-hidden border-t border-border/40"
+              >
+                <nav className="flex flex-col p-5 gap-3">
+                  {navItems.map((item) => (
                     <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 text-text-secondary hover:text-accent transition-colors"
-                      aria-label={social.label}
+                      key={item.href}
+                      href={item.href}
+                      className="text-text-secondary hover:text-text-primary hover:bg-surface-light px-4 py-2.5 rounded-xl transition-all duration-200 text-base font-medium"
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      <social.icon size={20} />
+                      {item.label}
                     </a>
                   ))}
-                  <button
-                    onClick={handleChangelogClick}
-                    className="relative p-2 text-text-secondary hover:text-accent transition-colors"
-                    aria-label="Changelog"
-                  >
-                    <Bell size={20} />
-                    <span className="absolute top-0 right-0 w-2 h-2 bg-accent rounded-full" />
-                  </button>
-                  <button
-                    onClick={toggleLanguage}
-                    className="flex items-center gap-2 px-3 py-2 text-text-secondary hover:text-accent transition-colors text-sm font-medium"
-                    aria-label="Toggle language"
-                  >
-                    <Globe size={18} />
-                    <span>{language === 'pt-BR' ? 'EN' : 'PT'}</span>
-                  </button>
-                </div>
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                  <div className="flex items-center gap-3 pt-3 mt-1 border-t border-border/40 px-2">
+                    {socialLinks.map((social) => (
+                      <a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 text-text-secondary hover:text-accent transition-colors rounded-lg hover:bg-surface-light"
+                        aria-label={social.label}
+                      >
+                        <social.icon size={20} />
+                      </a>
+                    ))}
+                    <button
+                      onClick={handleChangelogClick}
+                      className="relative p-2 text-text-secondary hover:text-accent transition-colors rounded-lg hover:bg-surface-light"
+                      aria-label="Changelog"
+                    >
+                      <Bell size={20} />
+                      <span className="absolute top-1 right-1 w-2 h-2 bg-accent rounded-full" />
+                    </button>
+                    <div className="ml-auto">
+                      <button
+                        onClick={toggleLanguage}
+                        className="flex items-center gap-2 px-3 py-2 text-text-secondary hover:text-accent transition-colors text-sm font-medium rounded-lg hover:bg-surface-light"
+                        aria-label="Toggle language"
+                      >
+                        <Globe size={18} />
+                        <span className="font-mono text-xs">{language === 'pt-BR' ? 'EN' : 'PT'}</span>
+                      </button>
+                    </div>
+                  </div>
+                </nav>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </motion.header>
 
-      {/* Mobile Changelog Dropdown - Outside header for proper positioning */}
+      {/* Mobile Changelog Dropdown */}
       <div ref={mobileChangelogRef} className="md:hidden">
         <AnimatePresence>
           {isChangelogOpen && <ChangelogDropdown isMobile />}
