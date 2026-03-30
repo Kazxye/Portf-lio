@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, MapPin, Send, Phone } from 'lucide-react';
+import { Mail, Github, Linkedin, MapPin, Send, Phone, FileDown } from 'lucide-react';
 import { useLanguage } from '../i18n';
+import cvFile from '../assets/CV_Kazys_Tatarunas.pdf?url';
 
 const DiscordIcon = ({ size = 24 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -130,7 +131,7 @@ const Contact = () => {
 
         {/* CTA */}
         <motion.div
-          className="text-center"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -144,6 +145,16 @@ const Contact = () => {
           >
             <Send size={18} />
             {t.contact.sendMessage}
+          </motion.a>
+          <motion.a
+            href={cvFile}
+            download="CV_Kazys_Tatarunas.pdf"
+            className="inline-flex items-center gap-3 px-8 py-4 glass border border-border-light hover:border-accent/40 text-text-muted hover:text-text-primary font-semibold rounded-xl transition-all duration-300"
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <FileDown size={18} />
+            {t.hero.downloadCV}
           </motion.a>
         </motion.div>
       </div>
