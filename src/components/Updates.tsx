@@ -61,7 +61,7 @@ const Updates = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            {t.updates.label}
+            {'>_ '}{t.updates.label}
           </motion.span>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mt-4">
             {t.updates.title} <span className="text-gradient">{t.updates.titleHighlight}</span>

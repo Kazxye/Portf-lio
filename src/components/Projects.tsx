@@ -56,7 +56,7 @@ const Projects = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            {t.projects.label}
+            {'>_ '}{t.projects.label}
           </motion.span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-text-primary mt-4 mb-4">
             {t.projects.title}{' '}

@@ -54,7 +54,7 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            {t.about.label}
+            {'>_ '}{t.about.label}
           </motion.span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-text-primary mt-4">
             {t.about.title} <span className="text-gradient">{t.about.titleHighlight}</span>?

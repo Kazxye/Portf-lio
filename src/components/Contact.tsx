@@ -36,7 +36,7 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            {t.contact.label}
+            {'>_ '}{t.contact.label}
           </motion.span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-text-primary mt-4 mb-4">
             {t.contact.title} <span className="text-gradient">{t.contact.titleHighlight}</span>?

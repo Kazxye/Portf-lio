@@ -171,7 +171,10 @@ const Hero = () => {
               <span className="text-text-secondary font-light text-2xl md:text-3xl block mb-1">
                 {t.hero.greeting}
               </span>
-              <span className="text-gradient text-5xl md:text-6xl lg:text-7xl">
+              <span
+                className="glitch-text text-gradient text-5xl md:text-6xl lg:text-7xl"
+                data-text="Kazys"
+              >
                 {displayText}
                 {showCursor && (
                   <span className="animate-pulse text-accent font-thin">|</span>
