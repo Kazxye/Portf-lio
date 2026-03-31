@@ -114,6 +114,19 @@ export const translations = {
           'Dashboard de estatísticas de ameaças',
         ],
       },
+      passwordManager: {
+        shortDescription: 'Gerenciador de senhas fullstack com criptografia zero-knowledge e arquitetura de segurança em camadas.',
+        problem: 'Serviços de armazenamento de senhas comuns enviam dados descriptografados ao servidor, expondo credenciais caso o backend seja comprometido.',
+        fullDescription: 'Gerenciador de senhas com modelo zero-knowledge: toda criptografia acontece no cliente antes de qualquer dado sair do dispositivo. A senha mestra nunca trafega pela rede — via Argon2id WASM deriva duas chaves independentes (auth_key via HKDF-SHA256 e enc_key via AES-256-GCM). O servidor recebe apenas o hash da auth_key (segundo Argon2id server-side) e o vault cifrado, sem capacidade de descriptografar. Backend FastAPI + PostgreSQL + Redis para sessões, deploy completo em Docker com Nginx/TLS.',
+        highlights: [
+          'Zero-knowledge: criptografia 100% client-side com Web Crypto API',
+          'Argon2id WASM — KDF memory-hard, resistente a GPU/ASIC',
+          'AES-256-GCM para cifrar o vault com authenticated encryption',
+          'Dupla camada de hashing: Argon2id client + Argon2id server-side',
+          'Refresh token HttpOnly + SameSite=Strict, imune a XSS',
+          'Stack completa: FastAPI + PostgreSQL + Redis + Docker + Nginx/TLS',
+        ],
+      },
       dllInjector: {
         shortDescription: 'Ferramenta C++ para injeção de DLLs em processos Windows com múltiplos métodos e interface ImGui.',
         problem: 'Estudantes de engenharia reversa precisam entender code injection sem material prático bem explicado.',
@@ -301,6 +314,19 @@ export const translations = {
           'Sub-100ms latency per analysis',
           'Modular and extensible architecture',
           'Detected threats statistics dashboard',
+        ],
+      },
+      passwordManager: {
+        shortDescription: 'Fullstack password manager with zero-knowledge encryption and layered security architecture.',
+        problem: 'Common password storage services send decrypted data to the server, exposing credentials if the backend is compromised.',
+        fullDescription: 'Password manager with a zero-knowledge model: all encryption happens client-side before any data leaves the device. The master password never travels over the network — via Argon2id WASM it derives two independent keys (auth_key via HKDF-SHA256 and enc_key via AES-256-GCM). The server receives only the auth_key hash (second Argon2id server-side) and the encrypted vault, with no ability to decrypt. FastAPI + PostgreSQL + Redis backend, fully deployed in Docker with Nginx/TLS.',
+        highlights: [
+          'Zero-knowledge: 100% client-side encryption with Web Crypto API',
+          'Argon2id WASM — memory-hard KDF, resistant to GPU/ASIC',
+          'AES-256-GCM for authenticated vault encryption',
+          'Double hashing layer: Argon2id client + Argon2id server-side',
+          'HttpOnly + SameSite=Strict refresh token, immune to XSS',
+          'Full stack: FastAPI + PostgreSQL + Redis + Docker + Nginx/TLS',
         ],
       },
       dllInjector: {

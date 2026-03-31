@@ -13,6 +13,16 @@ export interface Update {
 
 export const updates: Update[] = [
   {
+    id: '8',
+    date: '2026-03-31',
+    time: '02:00',
+    type: 'update',
+    titlePt: 'Password Manager — Em desenvolvimento',
+    titleEn: 'Password Manager — In development',
+    descriptionPt: 'Gerenciador de senhas zero-knowledge com criptografia AES-256-GCM client-side.',
+    descriptionEn: 'Zero-knowledge password manager with client-side AES-256-GCM encryption.',
+  },
+  {
     id: '7',
     date: '2026-02-09',
     time: '15:00',

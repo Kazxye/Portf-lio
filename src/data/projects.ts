@@ -4,6 +4,7 @@ import networkRadarImage from '../assets/networkradar.png';
 import phishGuardImage from '../assets/phishguard.png';
 import dllInjectorImage from '../assets/dllinjector.png';
 import solarHubImage from '../assets/solarhub.png';
+import passwordManagerImage from '../assets/passwordmanager.png';
 
 export type ProjectCategory = 'security' | 'gaming' | 'tools' | 'web';
 
@@ -22,6 +23,17 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    id: 'password-manager',
+    title: 'Password Manager',
+    image: passwordManagerImage,
+    tags: ['Python', 'FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'Redis', 'Docker', 'Argon2id', 'AES-256-GCM', 'JWT'],
+    githubUrl: 'https://github.com/Kazxye/PasswordManager',
+    category: 'security',
+    featured: true,
+    dateAdded: '2026-03-31',
+    translationKey: 'passwordManager',
+  },
   {
     id: 'solar-hub',
     title: 'SolarHub',
@@ -75,7 +87,7 @@ export const projects: Project[] = [
     tags: ['Python', 'Scapy', 'CustomTkinter', 'Discord API', 'Threading'],
     githubUrl: 'https://github.com/Kazxye/Loot-Logger-Albion-Online',
     category: 'gaming',
-    featured: true,
+    featured: false,
     dateAdded: '2025-11-15',
     translationKey: 'lootLogger',
   },
