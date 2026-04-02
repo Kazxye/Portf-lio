@@ -18,8 +18,11 @@ function HomePage() {
       <Header />
       <main>
         <Hero />
+        <div className="section-sep" />
         <Projects />
+        <div className="section-sep" />
         <About />
+        <div className="section-sep" />
         <Contact />
       </main>
       <Footer />

@@ -56,17 +56,17 @@ const TerminalWidget = () => {
 
   return (
     <motion.div
-      className="w-full max-w-[320px] font-mono text-[12px] rounded-xl overflow-hidden border border-border/60 bg-background/90 backdrop-blur-sm shadow-xl"
+      className="w-full max-w-[300px] font-mono text-[11.5px] rounded-xl overflow-hidden border border-border/60 bg-background/95 backdrop-blur-sm shadow-2xl shadow-black/40"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.8, duration: 0.8 }}
+      transition={{ delay: 1.0, duration: 0.8 }}
     >
       {/* Title bar */}
       <div className="flex items-center gap-2 px-4 py-2.5 bg-surface border-b border-border/60">
         <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
         <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
         <div className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-        <span className="ml-2 text-text-muted/50 text-[11px] tracking-wide">kazys@sec — ~</span>
+        <span className="ml-2 text-text-muted/50 text-[10px] tracking-wide">kazys@sec — ~</span>
       </div>
 
       {/* Terminal content */}
@@ -105,6 +105,7 @@ const TerminalWidget = () => {
   );
 };
 
+
 const Hero = () => {
   const { t } = useLanguage();
   const { displayText, showCursor } = useTypewriter('Kazys', 180, 600);
@@ -112,15 +113,15 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-grid"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-hex-grid"
     >
-      {/* Background Effects */}
+      {/* Background gradient orbs */}
       <div className="gradient-orb gradient-orb-1" />
       <div className="gradient-orb gradient-orb-2" />
 
-      {/* Subtle corner code decorations */}
+      {/* Subtle corner code fragments */}
       <motion.div
-        className="absolute top-[14%] left-[4%] font-mono text-[11px] leading-relaxed text-accent/[0.05] select-none pointer-events-none hidden xl:block"
+        className="absolute top-[14%] left-[4%] font-mono text-[10.5px] leading-relaxed text-accent/[0.05] select-none pointer-events-none hidden xl:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 2 }}
@@ -129,7 +130,7 @@ const Hero = () => {
       </motion.div>
 
       <motion.div
-        className="absolute bottom-[18%] left-[3%] font-mono text-[11px] leading-relaxed text-accent/[0.04] select-none pointer-events-none hidden xl:block"
+        className="absolute bottom-[18%] left-[3%] font-mono text-[10.5px] leading-relaxed text-accent/[0.04] select-none pointer-events-none hidden xl:block"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.4, duration: 2 }}
@@ -138,18 +139,19 @@ const Hero = () => {
       </motion.div>
 
       <div className="max-w-6xl mx-auto px-6 py-32 relative z-10 w-full">
+        {/* ── Asymmetric two-column layout ── */}
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
 
-          {/* ── Left: Text Content ── */}
+          {/* ── Left: Text Content (slightly narrower) ── */}
           <motion.div
             className="flex-1 text-center lg:text-left"
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-            {/* Available badge */}
+            {/* Status badge */}
             <motion.div
-              className="inline-flex items-center gap-2 mb-6 px-3 py-1.5 rounded-full bg-surface border border-border/60 text-xs font-mono text-text-muted"
+              className="inline-flex items-center gap-2 mb-7 px-3 py-1.5 rounded-full bg-surface border border-border/60 text-xs font-mono text-text-muted"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
@@ -161,9 +163,9 @@ const Hero = () => {
               {t.hero.statusLine}
             </motion.div>
 
-            {/* Name with typewriter */}
+            {/* Name */}
             <motion.h1
-              className="font-display font-bold leading-[1.05] mb-3"
+              className="font-display font-bold leading-[1.05] mb-4"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
@@ -182,7 +184,7 @@ const Hero = () => {
               </span>
             </motion.h1>
 
-            {/* Role — specific, monospace */}
+            {/* Role */}
             <motion.div
               className="mb-5"
               initial={{ opacity: 0, y: 20 }}
@@ -196,7 +198,7 @@ const Hero = () => {
 
             {/* Headline */}
             <motion.p
-              className="text-lg md:text-xl text-text-primary/85 mb-4 font-display font-medium leading-snug max-w-md mx-auto lg:mx-0"
+              className="text-lg md:text-xl text-text-primary/85 mb-3 font-display font-medium leading-snug max-w-md mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.7 }}
@@ -206,7 +208,7 @@ const Hero = () => {
 
             {/* Sub */}
             <motion.p
-              className="text-text-muted max-w-md mx-auto lg:mx-0 mb-10 leading-relaxed text-[14px]"
+              className="text-text-muted max-w-md mx-auto lg:mx-0 mb-10 leading-relaxed text-[13.5px]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.7 }}
@@ -223,7 +225,7 @@ const Hero = () => {
             >
               <motion.a
                 href="#projects"
-                className="px-7 py-3.5 bg-accent hover:bg-accent-dark text-white font-semibold rounded-xl transition-all duration-300 glow-accent-hover text-sm"
+                className="px-6 py-3 bg-accent hover:bg-accent-dark text-white font-semibold rounded-xl transition-all duration-300 glow-accent-hover text-sm tracking-wide"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -231,7 +233,7 @@ const Hero = () => {
               </motion.a>
               <motion.a
                 href="#contact"
-                className="px-7 py-3.5 glass border border-border-light hover:border-accent/40 text-text-primary font-semibold rounded-xl transition-all duration-300 text-sm"
+                className="px-6 py-3 glass border border-border-light hover:border-accent/40 text-text-primary font-semibold rounded-xl transition-all duration-300 text-sm tracking-wide"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -240,11 +242,11 @@ const Hero = () => {
               <motion.a
                 href={cvFile}
                 download="CV_Kazys_Tatarunas.pdf"
-                className="inline-flex items-center gap-2 px-7 py-3.5 glass border border-border-light hover:border-accent/40 text-text-muted hover:text-text-primary font-semibold rounded-xl transition-all duration-300 text-sm"
+                className="inline-flex items-center gap-2 px-6 py-3 glass border border-border-light hover:border-accent/40 text-text-muted hover:text-text-primary font-semibold rounded-xl transition-all duration-300 text-sm"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <FileDown size={15} />
+                <FileDown size={14} />
                 {t.hero.downloadCV}
               </motion.a>
             </motion.div>
@@ -300,7 +302,7 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-10 left-1/2 -translate-x-1/2"
           initial={{ opacity: 0 }}
@@ -313,8 +315,8 @@ const Hero = () => {
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <span className="text-[11px] uppercase tracking-widest font-mono">{t.hero.scroll}</span>
-            <ArrowDown size={16} />
+            <span className="text-[10px] uppercase tracking-widest font-mono">{t.hero.scroll}</span>
+            <ArrowDown size={15} />
           </motion.a>
         </motion.div>
       </div>

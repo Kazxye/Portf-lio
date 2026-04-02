@@ -69,14 +69,14 @@ const Projects = () => {
 
         {/* Featured Project — Large Hero Card */}
         <motion.div
-          className="mb-8 cursor-pointer group"
+          className="mb-8 cursor-pointer group card-trace"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
           onClick={() => setSelectedProjectId(featured.id)}
         >
-          <div className="relative rounded-2xl overflow-hidden border border-border hover:border-accent/40 transition-all duration-500 bg-surface">
+          <div className="relative rounded-2xl overflow-hidden border border-border group-hover:border-accent/30 transition-all duration-500 bg-surface group-hover:shadow-[0_12px_40px_rgba(139,92,246,0.09)]">
             <div className="grid grid-cols-1 lg:grid-cols-2">
               {/* Image */}
               <div className="relative h-64 lg:h-auto lg:min-h-[360px] overflow-hidden">
@@ -145,8 +145,10 @@ const Projects = () => {
 
                 {/* Action */}
                 <div className="flex items-center gap-2 text-sm text-text-muted group-hover:text-accent transition-colors">
-                  <span className="font-medium">Ver case study</span>
-                  <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <span className="font-medium font-mono text-xs tracking-wide uppercase">
+                    {t.projects.viewCode} →
+                  </span>
+                  <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
               </div>
             </div>
@@ -160,14 +162,14 @@ const Projects = () => {
             return (
               <motion.div
                 key={project.id}
-                className="cursor-pointer group"
+                className="cursor-pointer group card-trace"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 onClick={() => setSelectedProjectId(project.id)}
               >
-                <div className="h-full rounded-2xl overflow-hidden border border-border hover:border-accent/30 transition-all duration-400 bg-surface hover:shadow-xl hover:shadow-accent/5">
+                <div className="h-full rounded-2xl overflow-hidden border border-border group-hover:border-accent/25 transition-all duration-400 bg-surface group-hover:shadow-[0_8px_32px_rgba(139,92,246,0.08)]">
                   {/* Image */}
                   <div className="relative h-48 overflow-hidden">
                     <motion.img
@@ -215,9 +217,9 @@ const Projects = () => {
                     </div>
 
                     {/* Hover action */}
-                    <div className="flex items-center gap-1.5 text-xs text-text-muted group-hover:text-accent transition-colors">
-                      <span>Ver detalhes</span>
-                      <ArrowUpRight size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <div className="flex items-center gap-1.5 text-xs text-text-muted group-hover:text-accent transition-colors font-mono tracking-wide">
+                      <span>View Details</span>
+                      <ArrowUpRight size={11} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </div>
                   </div>
                 </div>

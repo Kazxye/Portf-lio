@@ -145,7 +145,7 @@ export const translations = {
       label: 'Sobre',
       title: 'Quem é',
       titleHighlight: 'Kazys',
-      bio: 'Estudante de Engenharia de Software na FIAP (3º semestre). Construo ferramentas que resolvem problemas reais — de packet sniffers para jogos a sistemas de detecção de phishing. Penso em segurança primeiro, performance sempre, e código que outros devs conseguem ler.',
+      bio: 'Estudante de Engenharia de Software na FIAP, construindo soluções com foco em segurança e impacto real.\n\nTenho experiência no desenvolvimento de ferramentas de análise e detecção, incluindo packet sniffers e sistemas de identificação de phishing, com atenção a performance, legibilidade e arquitetura.\n\nInteresso-me especialmente por segurança defensiva, onde o objetivo não é explorar sistemas, mas entendê-los profundamente para monitorar, detectar e responder a ameaças de forma eficiente.',
       approach: {
         title: 'Abordagem',
         items: [
@@ -160,6 +160,7 @@ export const translations = {
         frontend: { label: 'front', items: ['React', 'Tailwind', 'Framer Motion'] },
         backend: { label: 'back', items: ['FastAPI', 'Node.js', 'Discord API'] },
         infra: { label: 'infra', items: ['Git', 'Linux', 'Scapy', 'Wireshark'] },
+        security: { label: 'sec', items: ['Wireshark', 'Scapy', 'Nmap', 'Burp Suite', 'Metasploit'] },
       },
       interests: ['Cybersecurity', 'Reverse Engineering', 'Gaming Tools', 'OSINT'],
       education: {
@@ -362,6 +363,7 @@ export const translations = {
         frontend: { label: 'front', items: ['React', 'Tailwind', 'Framer Motion'] },
         backend: { label: 'back', items: ['FastAPI', 'Node.js', 'Discord API'] },
         infra: { label: 'infra', items: ['Git', 'Linux', 'Scapy', 'Wireshark'] },
+        security: { label: 'sec', items: ['Wireshark', 'Scapy', 'Nmap', 'Burp Suite', 'Metasploit'] },
       },
       interests: ['Cybersecurity', 'Reverse Engineering', 'Gaming Tools', 'OSINT'],
       education: {
