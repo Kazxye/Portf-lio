@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './i18n';
-import { AchievementToaster} from "./components/easter";
+import {AchievementToaster, KonamiMatrix} from "./components/easter";
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
@@ -40,6 +40,7 @@ function App() {
           <Route path="/projects" element={<AllProjects />} />
         </Routes>
       </BrowserRouter>
+        <KonamiMatrix/>
         <AchievementToaster/>
     </LanguageProvider>
   );
