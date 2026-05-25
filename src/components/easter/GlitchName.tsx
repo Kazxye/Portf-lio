@@ -1,14 +1,3 @@
-/**
- * GlitchName — Texto com RGB-split + jitter no hover (E03).
- *
- * Uso (substitui o "KAZYS" no Hero):
- *
- *   <GlitchName text="KAZYS" />
- *
- * Desbloqueia o achievement 'glitch-name' na primeira passada de mouse.
- * Em mobile, dispara no toque (1x) e mantém o efeito por 600ms.
- */
-
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAchievements } from "../../context/AchievementContext";
 

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../i18n';
+import { DontClickButton } from './easter';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -93,22 +94,25 @@ const Footer = () => {
 
         {/* ── Bottom bar ── */}
         <motion.div
-          className="mt-10 pt-6 border-t border-border/25 flex flex-col sm:flex-row items-center justify-between gap-3"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-10 pt-6 border-t border-border/25 flex flex-col sm:flex-row items-center justify-between gap-3"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
         >
           <p className="text-text-muted/50 text-xs font-mono">
             © {currentYear} Kazys Tatarunas. All rights reserved.
           </p>
-          <motion.a
-            href="#home"
-            className="text-text-muted hover:text-accent transition-colors text-xs font-mono tracking-wide"
-            whileHover={{ y: -2 }}
-          >
-            {t.footer.backToTop} ↑
-          </motion.a>
+          <div className="flex items-center gap-4">
+            <DontClickButton />
+            <motion.a
+                href="#home"
+                className="text-text-muted hover:text-accent transition-colors text-xs font-mono tracking-wide"
+                whileHover={{ y: -2 }}
+            >
+              {t.footer.backToTop} ↑
+            </motion.a>
+          </div>
         </motion.div>
       </div>
     </footer>

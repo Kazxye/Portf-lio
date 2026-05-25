@@ -458,3 +458,21 @@ body {
   }
 }
 
+@keyframes body-shake {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  10% { transform: translate(-3px, 2px) rotate(-0.25deg); }
+  25% { transform: translate(4px, -3px) rotate(0.3deg); }
+  40% { transform: translate(-4px, -2px) rotate(-0.2deg); }
+  55% { transform: translate(3px, 3px) rotate(0.2deg); }
+  70% { transform: translate(-2px, -3px) rotate(-0.15deg); }
+  85% { transform: translate(2px, 2px) rotate(0.1deg); }
+}
+
+.shake-body {
+  animation: body-shake 0.70s cubic-bezier(.36,.07,.19,.97);;
+}
+@media (prefers-reduced-motion: reduce) {
+  .shake-body { animation: none !important; }
+}
+
+
