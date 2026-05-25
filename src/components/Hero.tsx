@@ -4,6 +4,7 @@ import { ArrowDown, FileDown } from 'lucide-react';
 import { useLanguage } from '../i18n';
 import profileImage from '../assets/profile.png';
 import cvFile from '../assets/CV_Kazys_Tatarunas.pdf?url';
+import {useAchievements} from "../context/AchievementContext.tsx";
 
 const useTypewriter = (text: string, speed: number = 150, delay: number = 1000) => {
   const [displayText, setDisplayText] = useState('');
@@ -108,6 +109,7 @@ const TerminalWidget = () => {
 
 const Hero = () => {
   const { t } = useLanguage();
+  const { unlock } = useAchievements();
   const { displayText, showCursor } = useTypewriter('Kazys', 180, 600);
 
   return (
@@ -176,6 +178,7 @@ const Hero = () => {
               <span
                 className="glitch-text text-gradient text-5xl md:text-6xl lg:text-7xl"
                 data-text="Kazys"
+                onMouseEnter={() => unlock('glitch-name')}
               >
                 {displayText}
                 {showCursor && (

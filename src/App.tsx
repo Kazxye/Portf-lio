@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LanguageProvider } from './i18n';
+import { AchievementToaster} from "./components/easter";
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
@@ -13,7 +14,7 @@ function HomePage() {
     <div className="relative min-h-screen bg-background text-text-primary">
       {/* Noise Overlay */}
       <div className="noise-overlay" />
-      
+
       {/* Content */}
       <Header />
       <main>
@@ -39,6 +40,7 @@ function App() {
           <Route path="/projects" element={<AllProjects />} />
         </Routes>
       </BrowserRouter>
+        <AchievementToaster/>
     </LanguageProvider>
   );
 }

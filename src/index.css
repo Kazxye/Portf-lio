@@ -383,3 +383,78 @@ body {
   }
   93.5% { opacity: 0; }
 }
+
+@media (hover: hover) {
+  .glitch-text:hover {
+    animation: glitch-jitter-hover 0.3s steps(2) infinite !important;
+    cursor: default;
+  }
+
+  .glitch-text:hover::before,
+  .glitch-text:hover::after {
+    opacity: 1;
+    /* desliga gradient + fill transparente herdados; usa cor sólida */
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+    background-clip: initial;
+    clip-path: none;
+    mix-blend-mode: screen;
+    animation: none;
+  }
+
+  .glitch-text:hover::before {
+    color: #ff2bd6;
+    transform: translate(2px, -2px);
+  }
+  .glitch-text:hover::after {
+    color: #2bffd6;
+    transform: translate(-2px, 2px);
+  }
+}
+
+/* touch / força via JS */
+.glitch-text--active {
+  animation: glitch-jitter-hover 0.3s steps(2) infinite !important;
+}
+.glitch-text--active::before,
+.glitch-text--active::after {
+  opacity: 1;
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+  background-clip: initial;
+  clip-path: none;
+  mix-blend-mode: screen;
+  animation: none;
+}
+.glitch-text--active::before {
+  color: #ff2bd6;
+  transform: translate(2px, -2px);
+}
+.glitch-text--active::after {
+  color: #2bffd6;
+  transform: translate(-2px, 2px);
+}
+
+@keyframes glitch-jitter-hover {
+  0%   { transform: translate(0); }
+  25%  { transform: translate(-1px, 1px); }
+  50%  { transform: translate(1px, -1px); }
+  75%  { transform: translate(-1px, -1px); }
+  100% { transform: translate(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch-text:hover,
+  .glitch-text--active {
+    animation: none !important;
+  }
+  .glitch-text:hover::before,
+  .glitch-text:hover::after,
+  .glitch-text--active::before,
+  .glitch-text--active::after {
+    opacity: 0 !important;
+  }
+}
+
