@@ -96,9 +96,9 @@ const TerminalWidget = () => {
         <div className="flex gap-2 items-center">
           <span className="text-accent/80 select-none">kazys@sec:~$</span>
           <motion.span
-            className="w-[7px] h-[14px] bg-accent/50 inline-block"
-            animate={{ opacity: [1, 0, 1] }}
-            transition={{ duration: 1.1, repeat: Infinity, ease: 'steps(1)' }}
+              className="w-[7px] h-[14px] bg-accent/50 inline-block"
+              animate={{ opacity: [1, 1, 0, 0] }}
+              transition={{ duration: 1.1, repeat: Infinity, times: [0, 0.5, 0.5, 1], ease: 'linear' }}
           />
         </div>
       </div>
