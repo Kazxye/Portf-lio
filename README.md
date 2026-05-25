@@ -117,31 +117,6 @@ npm run preview
 
 ---
 
-## Estrutura do Projeto
-
-```
-src/
-├── assets/              # Imagens de projetos e perfil
-├── components/
-│   ├── Header.tsx       # Navegação flutuante + toggle de idioma
-│   ├── Hero.tsx         # Seção principal, typing effect, download CV
-│   ├── Projects.tsx     # Carrossel 3D com modal de detalhes
-│   ├── ProjectCard.tsx  # Card individual de projeto
-│   ├── About.tsx        # Bio, foco técnico e skill domains
-│   ├── Contact.tsx      # Links de contato
-│   ├── Updates.tsx      # Changelog de atualizações do portfólio
-│   └── Footer.tsx       # Rodapé com navegação e social links
-├── i18n/
-│   ├── translations.ts  # Todos os textos em PT-BR e EN
-│   ├── LanguageContext.tsx
-│   └── index.ts
-├── App.tsx
-├── main.tsx
-└── index.css            # Tema global, variáveis CSS, animações
-```
-
----
-
 ## Contato
 
 <p align="center">
