@@ -28,7 +28,7 @@ export default function Hero() {
 
       <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
         {/* Portrait */}
-        <div className="relative mb-8">
+        <div className="animate-fade-up relative mb-8">
           <div
             aria-hidden
             className="absolute -inset-6 -z-10 rounded-full bg-ember-500/30 blur-3xl"
@@ -45,18 +45,30 @@ export default function Hero() {
         </div>
 
         {/* Role + name */}
-        <p className="font-display text-sm uppercase tracking-[0.3em] text-ember-300">
+        <p
+          className="animate-fade-up font-display text-sm uppercase tracking-[0.3em] text-ember-300"
+          style={{ animationDelay: '80ms' }}
+        >
           {t('hero.role')}
         </p>
-        <h1 className="mt-3 font-serif text-6xl italic leading-none text-white sm:text-7xl">
+        <h1
+          className="animate-fade-up mt-3 font-serif text-6xl italic leading-none text-white sm:text-7xl"
+          style={{ animationDelay: '160ms' }}
+        >
           {t('hero.name')}
         </h1>
-        <p className="mt-6 max-w-xl text-balance text-base text-sand/70">
+        <p
+          className="animate-fade-up mt-6 max-w-xl text-balance text-base text-sand/70"
+          style={{ animationDelay: '240ms' }}
+        >
           {t('hero.subtitle')}
         </p>
 
         {/* CTAs */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <div
+          className="animate-fade-up mt-8 flex flex-wrap items-center justify-center gap-3"
+          style={{ animationDelay: '320ms' }}
+        >
           <Button href="#work" variant="primary">
             {t('hero.primaryCta')}
             <ArrowUpRight width={16} height={16} />
@@ -70,7 +82,9 @@ export default function Hero() {
         </div>
 
         {/* Social links */}
-        <SocialLinks className="mt-8 justify-center" />
+        <div className="animate-fade-up" style={{ animationDelay: '400ms' }}>
+          <SocialLinks className="mt-8 justify-center" />
+        </div>
       </div>
     </section>
   )
