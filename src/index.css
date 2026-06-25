@@ -48,6 +48,39 @@
     content: '';
     @apply h-1.5 w-1.5 rounded-full bg-ember-500;
   }
+
+  /* Brand name with a slow ember sheen sweeping across it */
+  .brand-name {
+    background-image: linear-gradient(
+      110deg,
+      #ffffff 0%,
+      #ffffff 38%,
+      #ff9b6a 50%,
+      #ffffff 62%,
+      #ffffff 100%
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: brand-sheen 7s ease-in-out infinite;
+  }
+}
+
+@keyframes brand-sheen {
+  0%,
+  100% {
+    background-position: 120% 50%;
+  }
+  50% {
+    background-position: -20% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-name {
+    animation: none;
+  }
 }
 
 @layer utilities {

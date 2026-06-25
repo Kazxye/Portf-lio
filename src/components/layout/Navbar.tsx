@@ -42,7 +42,7 @@ export default function Navbar() {
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ember-500 text-white">
             <Shield width={18} height={18} />
           </span>
-          <span className="font-display text-base font-semibold text-white">
+          <span className="brand-name font-display text-lg font-semibold tracking-tight">
             {t('hero.name')}
           </span>
         </a>

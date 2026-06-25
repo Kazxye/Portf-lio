@@ -1,13 +1,38 @@
-# Ember — Security Engineer Portfolio
+# Kazys Tatarunas — Portfolio
 
-A dark, ember-themed portfolio for a **Security Developer & Software Engineer**.
-Built with **React + TypeScript + Tailwind CSS** on **Vite**, with full
-**English / Portuguese (pt-BR)** internationalization via `react-i18next`.
-Fully responsive, accessible, and dependency-light.
+Personal portfolio of **Kazys Tatarunas**, a Security Developer & Software
+Engineer. A dark, ember-themed single-page site with a right-hand icon
+navigation rail, bilingual content (English / Portuguese), and a working
+contact form — no backend required.
 
-> Project copy reflects a real professional profile. Imagery is placeholder
-> graphics, and the social/contact URLs in `src/data/content.ts` use `#`
-> placeholders (except email) — set your real links there before going live.
+🔗 **Live:** [kazys.dev](https://kazys.dev)
+
+Built with **React + TypeScript + Tailwind CSS** on **Vite**, deployed on
+**Vercel**. Dependency-light by design: the only runtime dependencies are React
+and `i18next` — icons, animations, and UI are hand-rolled.
+
+## Features
+
+- **Bilingual (EN / pt-BR)** via `react-i18next`, browser-detected and
+  remembered in `localStorage`. All copy lives in two JSON files.
+- **Icon navigation rail** with hover tooltips and scroll-spy active-section
+  highlighting (IntersectionObserver).
+- **Working contact form** through [Web3Forms](https://web3forms.com) — topic
+  chips, honeypot spam trap, and loading / success / error states.
+- **Inline SVG icon set** (lucide-style) — no icon dependency.
+- **Accessible**: semantic landmarks, skip link, focus-visible rings, ARIA on
+  the accordion / language toggle / nav, `<html lang>` kept in sync, and
+  `prefers-reduced-motion` respected.
+
+## Tech stack
+
+| Area      | Tools                                            |
+| --------- | ------------------------------------------------ |
+| Framework | React 18, TypeScript, Vite                       |
+| Styling   | Tailwind CSS, custom CSS layers                  |
+| i18n      | i18next, react-i18next                           |
+| Forms     | Web3Forms                                        |
+| Hosting   | Vercel (custom domain `kazys.dev`)               |
 
 ## Getting started
 
@@ -16,20 +41,35 @@ npm install
 npm run dev      # start the dev server
 npm run build    # type-check + production build
 npm run preview  # preview the production build
+npm run lint     # type-check only (tsc --noEmit)
 ```
 
-### Contact form
+### Contact form key
 
-The contact form submits through [Web3Forms](https://web3forms.com) — no backend
-required. Grab a free access key (just enter the email where you want to receive
-messages), then copy `.env.example` to `.env` and set:
+The form posts to Web3Forms, so it needs a free access key. Grab one at
+[web3forms.com](https://web3forms.com) (just enter the email where messages
+should land), then create a local `.env` from the example:
 
 ```bash
+cp .env.example .env
+# then set:
 VITE_WEB3FORMS_KEY=your-access-key
 ```
 
-Without a key the form renders and validates but submissions will fail. The
-direct social/contact links keep working regardless.
+Because it's a `VITE_` build-time variable, the same key must be added in
+**Vercel → Project Settings → Environment Variables** for the deployed form to
+work. Without a key the form still renders and validates, but submissions fail
+gracefully and the direct social links keep working.
+
+## Deployment
+
+The site is hosted on Vercel and wired to this repository:
+
+- Pushes to **`main`** deploy to production (`kazys.dev`).
+- Any other branch / PR gets its own **preview deployment** with a unique URL —
+  validate changes there before merging to `main`.
+
+Vercel auto-detects the Vite setup; no `vercel.json` is needed.
 
 ## Project structure
 
@@ -37,29 +77,31 @@ direct social/contact links keep working regardless.
 src/
 ├── App.tsx                 # page composition / section order
 ├── main.tsx                # React entry (loads i18n)
-├── index.css               # Tailwind layers + shared component classes
+├── index.css               # Tailwind layers + shared classes + animations
 ├── i18n/
 │   ├── index.ts            # i18next init + language persistence
 │   └── locales/
 │       ├── en.json         # ← all English copy
 │       └── pt.json         # ← all Portuguese (pt-BR) copy
 ├── data/
-│   └── content.ts          # structural config (nav, socials) + TS types
+│   └── content.ts          # structural config (nav, socials, images) + types
+├── assets/                 # portrait, project shots, approach gallery
 └── components/
     ├── layout/
-    │   ├── Navbar.tsx       # sticky nav + language switcher + mobile menu
+    │   ├── Navbar.tsx       # top bar: brand, availability, location, language
+    │   ├── NavRail.tsx      # right-hand icon nav rail + scroll-spy
     │   └── Footer.tsx       # closing CTA + links + socials
     ├── sections/
-    │   ├── Hero.tsx         # name, role, CTAs, social links
+    │   ├── Hero.tsx         # portrait, name, role, CTAs, social links
     │   ├── Stats.tsx        # technical metrics
     │   ├── About.tsx
     │   ├── FeaturedWork.tsx # Projects (core section) with stack chips
-    │   ├── Services.tsx     # Expertise (security/eng areas)
-    │   ├── Story.tsx        # Approach / philosophy
+    │   ├── Services.tsx     # Expertise (security / engineering areas)
+    │   ├── Story.tsx        # Approach + image gallery
     │   ├── TechStack.tsx    # tech grouped by category
     │   ├── Brands.tsx       # tools marquee (derived from tech stack)
-    │   ├── WorkProcess.tsx  # security workflow
-    │   ├── Education.tsx    # Education & Learning (replaces pricing)
+    │   ├── WorkProcess.tsx  # security workflow (per-step icons)
+    │   ├── Education.tsx     # Education & Learning
     │   ├── Faq.tsx
     │   ├── CtaBanner.tsx
     │   └── Contact.tsx      # form + topic chips + direct links
@@ -67,7 +109,6 @@ src/
         ├── Button.tsx
         ├── Section.tsx
         ├── SectionHeading.tsx
-        ├── Placeholder.tsx
         ├── LanguageSwitcher.tsx
         ├── SocialLinks.tsx
         └── Icon.tsx         # inline SVG icons + brand glyphs
@@ -75,22 +116,13 @@ src/
 
 ## Customizing
 
-- **Copy** — edit `src/i18n/locales/en.json` and `pt.json`. Every visible
-  string lives here; keep both files in sync.
-- **Links** — set your real GitHub / LinkedIn / Discord / WhatsApp URLs (and
-  email) in the `socials` array of `src/data/content.ts`.
-- **Colors / theme** — edit the `ember`, `ink`, and `sand` palettes in
+- **Copy** — edit `src/i18n/locales/en.json` and `pt.json`. Every visible string
+  lives here; keep both files in sync.
+- **Links & images** — set social URLs, the CV path, project links, and the
+  approach gallery in `src/data/content.ts`.
+- **Theme** — tweak the `ember`, `ink`, and `sand` palettes in
   `tailwind.config.js`.
-- **Images** — replace `<Placeholder />` usages with real `<img>` elements and
-  meaningful `alt` text.
-- **Language** — default is browser-detected (pt → Portuguese, else English) and
-  remembered in `localStorage`. Add a locale by dropping a new JSON file in
-  `src/i18n/locales` and registering it in `src/i18n/index.ts`.
-
-## Notes
-
-- Mobile-first responsive layout (single column → multi-column at `sm`/`lg`).
-- Accessible: semantic landmarks, skip link, focus-visible rings, ARIA on the
-  accordion / language toggle / mobile menu, `<html lang>` kept in sync.
-- The contact form posts to Web3Forms via `VITE_WEB3FORMS_KEY` (see *Contact form* above).
-- No fake testimonials, certifications, or metrics — content is framed honestly.
+- **Sections** — reorder or add sections in `src/App.tsx`; the nav rail items
+  live in `src/components/layout/NavRail.tsx`.
+- **Add a language** — drop a new JSON file in `src/i18n/locales` and register
+  it in `src/i18n/index.ts`.

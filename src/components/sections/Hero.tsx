@@ -27,15 +27,6 @@ export default function Hero() {
       />
 
       <div className="relative mx-auto flex max-w-3xl flex-col items-center text-center">
-        {/* Availability pill */}
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-sand/80">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-          </span>
-          {t('hero.available')}
-        </div>
-
         {/* Portrait */}
         <div className="relative mb-8">
           <div
