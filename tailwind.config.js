@@ -31,7 +31,7 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         display: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
         serif: ['"Instrument Serif"', 'Georgia', 'serif'],
-        signature: ['"Mr Dafoe"', 'cursive'],
+        signature: ['"Kaushan Script"', 'cursive'],
       },
       borderRadius: {
         '4xl': '2rem',
