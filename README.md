@@ -1,141 +1,96 @@
-<h1 align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=28&pause=1000&color=8B5CF6&center=true&vCenter=true&width=600&lines=Kazys+Tatarunas+-+Portfolio;Defensive+Security+%7C+Fullstack+Dev;Building+tools+that+protect." alt="Typing SVG" />
-</h1>
+# Ember — Security Engineer Portfolio
 
-<p align="center">
-  <a href="https://github.com/Kazxye"><img src="https://img.shields.io/badge/GitHub-Kazxye-8b5cf6?style=flat-square&logo=github" /></a>
-  <a href="https://www.linkedin.com/in/kazystatarunas/"><img src="https://img.shields.io/badge/LinkedIn-kazystatarunas-8b5cf6?style=flat-square&logo=linkedin" /></a>
-  <a href="mailto:kazysdzigantatarunas@outlook.com"><img src="https://img.shields.io/badge/Email-Outlook-8b5cf6?style=flat-square&logo=microsoft-outlook" /></a>
-  <img src="https://img.shields.io/badge/React-18-61dafb?style=flat-square&logo=react" />
-  <img src="https://img.shields.io/badge/TypeScript-5.0+-3178c6?style=flat-square&logo=typescript" />
-  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" />
-</p>
+A dark, ember-themed portfolio for a **Security Developer & Software Engineer**.
+Built with **React + TypeScript + Tailwind CSS** on **Vite**, with full
+**English / Portuguese (pt-BR)** internationalization via `react-i18next`.
+Fully responsive, accessible, and dependency-light.
 
----
+> Project copy reflects a real professional profile. Imagery is placeholder
+> graphics, and the social/contact URLs in `src/data/content.ts` use `#`
+> placeholders (except email) — set your real links there before going live.
 
-## Sobre
-
-Portfólio pessoal de **Kazys Tatarunas** — estudante de Engenharia de Software na FIAP com foco em **segurança defensiva** e desenvolvimento fullstack.
-
-Construído do zero com React + TypeScript, o site serve como vitrine de projetos reais: desde packet sniffers e sistemas de detecção de phishing até dashboards de monitoramento de rede. Toda a interface foi desenhada com tema cybersecurity — dark mode, animações fluidas e suporte bilíngue PT-BR / EN.
-
-> Se você é recrutador: o [LinkedIn](https://www.linkedin.com/in/kazystatarunas/) tem o CV completo. Se você é dev: o código está aqui para explorar.
-
----
-
-## Stack
-
-| Tecnologia | Função |
-|---|---|
-| **React 18** | UI framework principal |
-| **TypeScript 5** | Tipagem estática em todo o projeto |
-| **Tailwind CSS 3** | Estilização utility-first |
-| **Framer Motion** | Animações e transições (carrossel 3D, glitch, fade-ins) |
-| **Vite 5** | Build tool — HMR instantâneo, bundle otimizado |
-| **Lucide React** | Ícones consistentes |
-
----
-
-## Funcionalidades
-
-- **Bilíngue** — alternância PT-BR / EN via context API, sem recarregar a página
-- **Carrossel 3D** — navegação entre projetos com perspectiva CSS e animações Framer Motion
-- **Glitch effect** — efeito de texto glitch no hero, referência ao tema cyber
-- **Modal de projeto** — detalhes, stack, highlights e link para o repositório
-- **Seção Updates** — changelog in-page com histórico de adições ao portfólio
-- **Download de CV** — botão direto para baixar o currículo em PDF
-- **Totalmente responsivo** — mobile, tablet e desktop
-
----
-
-## Projetos em Destaque
-
-### PhishGuard
-> Detecção de phishing em tempo real com extensão de navegador + REST API.
-
-Extensão que intercepta requisições no browser e consulta uma API FastAPI com análise de URLs e heurísticas de phishing. Foco em baixa latência e alta taxa de detecção com mínimos falsos positivos.
-
-`Python` `FastAPI` `TypeScript` `Browser Extension` `REST API`
-
-[Ver repositório](https://github.com/Kazxye/PhishGuard)
-
----
-
-### Network Radar
-> Dashboard fullstack de monitoramento de rede em tempo real.
-
-Captura e analisa pacotes com Scapy, expõe via WebSocket para um frontend React com gráficos ao vivo. Arquitetura event-driven com atualizações a cada 500ms.
-
-`React` `TypeScript` `FastAPI` `Scapy` `WebSocket` `Pydantic`
-
-[Ver repositório](https://github.com/Kazxye/Network-Radar)
-
----
-
-### Password Manager
-> Gerenciador de senhas local com criptografia AES e interface desktop.
-
-Armazenamento seguro de credenciais com vault criptografado localmente. Sem dependência de nuvem — dados ficam na máquina do usuário.
-
-`Python` `AES Encryption` `CustomTkinter`
-
----
-
-### Loot Logger — Albion Online
-> Sistema de logging de loot para Albion Online com integração Discord.
-
-Captura pacotes UDP do jogo, parseia eventos de loot e os exibe em interface gráfica + notificações no Discord via webhook em tempo real.
-
-`Python` `Scapy` `CustomTkinter` `Discord API` `Threading`
-
-[Ver repositório](https://github.com/Kazxye/Loot-Logger-Albion-Online)
-
----
-
-## Como Rodar Localmente
+## Getting started
 
 ```bash
-# 1. Clonar o repositório
-git clone https://github.com/Kazxye/portfolio.git
-cd portfolio
-
-# 2. Instalar dependências
 npm install
-
-# 3. Iniciar servidor de desenvolvimento
-npm run dev
-# → http://localhost:5173
-
-# 4. Build para produção
-npm run build
-
-# 5. Prévia do build
-npm run preview
+npm run dev      # start the dev server
+npm run build    # type-check + production build
+npm run preview  # preview the production build
 ```
 
-**Requisitos:** Node.js 18+ e npm 9+
+### Contact form
 
----
+The contact form submits through [Web3Forms](https://web3forms.com) — no backend
+required. Grab a free access key (just enter the email where you want to receive
+messages), then copy `.env.example` to `.env` and set:
 
-## Contato
+```bash
+VITE_WEB3FORMS_KEY=your-access-key
+```
 
-<p align="center">
-  <a href="https://github.com/Kazxye">
-    <img src="https://img.shields.io/badge/GitHub-@Kazxye-171515?style=for-the-badge&logo=github" />
-  </a>
-  <a href="https://www.linkedin.com/in/kazystatarunas/">
-    <img src="https://img.shields.io/badge/LinkedIn-kazystatarunas-0077b5?style=for-the-badge&logo=linkedin" />
-  </a>
-  <a href="mailto:kazysdzigantatarunas@outlook.com">
-    <img src="https://img.shields.io/badge/Email-Outlook-0078d4?style=for-the-badge&logo=microsoft-outlook" />
-  </a>
-  <a href="https://discord.com/users/kazys_">
-    <img src="https://img.shields.io/badge/Discord-kazys__-5865f2?style=for-the-badge&logo=discord&logoColor=white" />
-  </a>
-</p>
+Without a key the form renders and validates but submissions will fail. The
+direct social/contact links keep working regardless.
 
----
+## Project structure
 
-## Licença
+```
+src/
+├── App.tsx                 # page composition / section order
+├── main.tsx                # React entry (loads i18n)
+├── index.css               # Tailwind layers + shared component classes
+├── i18n/
+│   ├── index.ts            # i18next init + language persistence
+│   └── locales/
+│       ├── en.json         # ← all English copy
+│       └── pt.json         # ← all Portuguese (pt-BR) copy
+├── data/
+│   └── content.ts          # structural config (nav, socials) + TS types
+└── components/
+    ├── layout/
+    │   ├── Navbar.tsx       # sticky nav + language switcher + mobile menu
+    │   └── Footer.tsx       # closing CTA + links + socials
+    ├── sections/
+    │   ├── Hero.tsx         # name, role, CTAs, social links
+    │   ├── Stats.tsx        # technical metrics
+    │   ├── About.tsx
+    │   ├── FeaturedWork.tsx # Projects (core section) with stack chips
+    │   ├── Services.tsx     # Expertise (security/eng areas)
+    │   ├── Story.tsx        # Approach / philosophy
+    │   ├── TechStack.tsx    # tech grouped by category
+    │   ├── Brands.tsx       # tools marquee (derived from tech stack)
+    │   ├── WorkProcess.tsx  # security workflow
+    │   ├── Education.tsx    # Education & Learning (replaces pricing)
+    │   ├── Faq.tsx
+    │   ├── CtaBanner.tsx
+    │   └── Contact.tsx      # form + topic chips + direct links
+    └── ui/
+        ├── Button.tsx
+        ├── Section.tsx
+        ├── SectionHeading.tsx
+        ├── Placeholder.tsx
+        ├── LanguageSwitcher.tsx
+        ├── SocialLinks.tsx
+        └── Icon.tsx         # inline SVG icons + brand glyphs
+```
 
-MIT © [Kazys Tatarunas](https://github.com/Kazxye)
+## Customizing
+
+- **Copy** — edit `src/i18n/locales/en.json` and `pt.json`. Every visible
+  string lives here; keep both files in sync.
+- **Links** — set your real GitHub / LinkedIn / Discord / WhatsApp URLs (and
+  email) in the `socials` array of `src/data/content.ts`.
+- **Colors / theme** — edit the `ember`, `ink`, and `sand` palettes in
+  `tailwind.config.js`.
+- **Images** — replace `<Placeholder />` usages with real `<img>` elements and
+  meaningful `alt` text.
+- **Language** — default is browser-detected (pt → Portuguese, else English) and
+  remembered in `localStorage`. Add a locale by dropping a new JSON file in
+  `src/i18n/locales` and registering it in `src/i18n/index.ts`.
+
+## Notes
+
+- Mobile-first responsive layout (single column → multi-column at `sm`/`lg`).
+- Accessible: semantic landmarks, skip link, focus-visible rings, ARIA on the
+  accordion / language toggle / mobile menu, `<html lang>` kept in sync.
+- The contact form posts to Web3Forms via `VITE_WEB3FORMS_KEY` (see *Contact form* above).
+- No fake testimonials, certifications, or metrics — content is framed honestly.

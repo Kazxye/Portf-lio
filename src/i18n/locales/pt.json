@@ -1,0 +1,267 @@
+{
+  "nav": {
+    "projects": "Projetos",
+    "expertise": "Especialidades",
+    "process": "Processo",
+    "education": "Formação",
+    "faq": "FAQ",
+    "bookCall": "Fale Comigo",
+    "menuOpen": "Abrir menu",
+    "menuClose": "Fechar menu",
+    "skip": "Pular para o conteúdo"
+  },
+  "lang": {
+    "switch": "Mudar idioma",
+    "en": "EN",
+    "pt": "PT"
+  },
+  "hero": {
+    "available": "Disponível para trabalho & colaboração",
+    "role": "Desenvolvedor de Segurança & Engenheiro de Software",
+    "name": "Kazys",
+    "subtitle": "Construindo sistemas seguros, ferramentas de automação e soluções de cibersegurança que resolvem problemas reais.",
+    "primaryCta": "Ver Projetos",
+    "secondaryCta": "Fale Comigo",
+    "downloadCv": "Baixar CV",
+    "portraitAlt": "Kazys Tatarunas"
+  },
+  "stats": {
+    "items": [
+      { "value": "10+", "label": "Projetos construídos em segurança e software" },
+      { "value": "20+", "label": "Tecnologias usadas em produção e estudo" },
+      { "value": "5+", "label": "Projetos dedicados de cibersegurança" },
+      { "value": "5+", "label": "Anos estudando tecnologia e código" }
+    ]
+  },
+  "about": {
+    "eyebrow": "Sobre",
+    "statement": "Sou estudante de Engenharia de Software com foco em cibersegurança. Construo ferramentas de segurança, automação e sistemas backend, e me interesso por segurança ofensiva e defensiva e por sistemas de baixo nível.",
+    "meta": [
+      { "label": "Localização", "value": "São Paulo, Brasil" },
+      { "label": "Formação", "value": "Engenharia de Software @ FIAP" },
+      { "label": "Foco", "value": "Segurança Ofensiva & Defensiva" }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Trabalhos Selecionados",
+    "title": "Projetos",
+    "viewAll": "GitHub",
+    "stackLabel": "Stack",
+    "code": "Código",
+    "live": "Demo ao vivo",
+    "items": [
+      {
+        "title": "Password Manager",
+        "category": "Segurança · Fullstack",
+        "description": "Um gerenciador de senhas zero-knowledge onde toda a criptografia acontece no cliente, então o servidor nunca vê as credenciais em texto puro. Construído com AES-256-GCM, derivação de chave Argon2id e chaves não-extraíveis da Web Crypto para resistir a XSS.",
+        "stack": ["FastAPI", "PostgreSQL", "AES-256-GCM", "Argon2id", "React", "Docker"]
+      },
+      {
+        "title": "Kazz Injector",
+        "category": "Engenharia Reversa · Windows",
+        "description": "Um injetor de DLL no Windows criado para estudar internals de processos. Implementa tanto LoadLibrary via remote thread quanto mapeamento manual de PE, com lista de processos em tempo real em uma interface ImGui acelerada por hardware.",
+        "stack": ["C++20", "Windows API", "ImGui", "PE Mapping", "DirectX11"]
+      },
+      {
+        "title": "PhishGuard",
+        "category": "Segurança Defensiva",
+        "description": "Uma plataforma de detecção de phishing em tempo real que roda seis motores de análise ao mesmo tempo: homógrafos, idade do domínio, SSL, falsificação de marca, análise de formulários e VirusTotal. Um backend FastAPI alimenta uma extensão para Chrome que pontua URLs enquanto você navega.",
+        "stack": ["Python", "FastAPI", "Chrome Extension", "React", "VirusTotal API"]
+      },
+      {
+        "title": "Network Radar",
+        "category": "Análise de Redes",
+        "description": "Um monitor de rede local em tempo real que descobre dispositivos via varredura ARP e os exibe em um radar animado, com identificação de fabricante, varredura de portas e atualizações ao vivo via WebSocket.",
+        "stack": ["React", "FastAPI", "Scapy", "WebSocket", "Framer Motion"]
+      },
+      {
+        "title": "SolarHub",
+        "category": "Frontend",
+        "description": "Uma landing page premium de alta conversão com animações em camadas, tipografia mascarada, busca de FAQ em tempo real e suporte completo de acessibilidade, incluindo focus trapping e movimento reduzido.",
+        "stack": ["Next.js", "React", "TypeScript", "Tailwind"]
+      }
+    ]
+  },
+  "expertise": {
+    "eyebrow": "O que eu faço",
+    "title": "Especialidades",
+    "items": [
+      {
+        "tag": "01",
+        "name": "Segurança Ofensiva",
+        "description": "Mentalidade de atacante, pesquisa de exploits e ferramentas ofensivas."
+      },
+      {
+        "tag": "02",
+        "name": "Segurança Defensiva",
+        "description": "Detecção, hardening e análise de phishing / ameaças."
+      },
+      {
+        "tag": "03",
+        "name": "Desenvolvimento Backend",
+        "description": "APIs e serviços seguros com Python, FastAPI e Node.js."
+      },
+      {
+        "tag": "04",
+        "name": "Engenharia Reversa",
+        "description": "Internals do Windows, análise de binários e sistemas de baixo nível."
+      },
+      {
+        "tag": "05",
+        "name": "Automação & Ferramentas",
+        "description": "Scripts e ferramentas que eliminam o trabalho manual repetitivo."
+      },
+      {
+        "tag": "06",
+        "name": "Análise de Redes",
+        "description": "Inspeção de tráfego, varredura e diagnóstico de redes."
+      }
+    ]
+  },
+  "approach": {
+    "eyebrow": "Abordagem",
+    "heading": "Por trás de todo sistema seguro existe uma decisão de engenharia deliberada",
+    "body": "Segurança não é um recurso que se parafusa no final. É uma série de escolhas feitas ao ler especificações, modelar ameaças e escrever código. Construo com essa mentalidade desde a primeira linha.",
+    "gallery": [
+      "Close de uma placa de circuito e chip controlador de rede",
+      "Código-fonte aberto em um editor escuro",
+      "Mão esboçando um mapa de arquitetura de sistema em um quadro branco",
+      "Estação de trabalho de desenvolvedor com dois monitores em ambiente escuro"
+    ]
+  },
+  "tech": {
+    "eyebrow": "Ferramentas",
+    "title": "Tech Stack",
+    "categories": [
+      { "name": "Linguagens", "items": ["Python", "TypeScript", "C++", "C#", "JavaScript"] },
+      { "name": "Frontend", "items": ["React", "Next.js", "Tailwind", "Vite"] },
+      { "name": "Backend", "items": ["FastAPI", "Node.js", "PostgreSQL", "Redis"] },
+      { "name": "Segurança", "items": ["Wireshark", "Burp Suite", "Nmap", "Scapy"] },
+      { "name": "Infraestrutura", "items": ["Docker", "Linux", "Git"] }
+    ]
+  },
+  "tools": {
+    "label": "Ferramentas & tecnologias que utilizo"
+  },
+  "process": {
+    "eyebrow": "Como eu trabalho",
+    "title": "Processo de Trabalho",
+    "items": [
+      {
+        "index": "01",
+        "title": "Pesquisa & Modelagem de Ameaças",
+        "description": "Entender o sistema, seus ativos e como ele poderia ser atacado na prática."
+      },
+      {
+        "index": "02",
+        "title": "Design & Arquitetura",
+        "description": "Planejar uma estrutura segura e sustentável antes de escrever código de produção."
+      },
+      {
+        "index": "03",
+        "title": "Implementação",
+        "description": "Construir com código limpo, defensivo e as ferramentas certas para o trabalho."
+      },
+      {
+        "index": "04",
+        "title": "Testes & Hardening",
+        "description": "Validar, tentar quebrar e reforçar até resistir sob pressão."
+      }
+    ]
+  },
+  "education": {
+    "eyebrow": "Formação & Certificações",
+    "title": "Formação & Aprendizado",
+    "degree": {
+      "badge": "Graduação",
+      "school": "FIAP",
+      "program": "Engenharia de Software",
+      "period": "Em andamento",
+      "description": "Estudando engenharia de software com foco autodirigido em cibersegurança, sistemas e desenvolvimento seguro."
+    },
+    "certsTitle": "Certificações",
+    "certs": [
+      { "name": "Pre Security", "issuer": "TryHackMe" },
+      { "name": "Redes de Computadores", "issuer": "FIAP" },
+      { "name": "Linux", "issuer": "FIAP" },
+      { "name": "Python", "issuer": "FIAP" }
+    ],
+    "tracksTitle": "Estudando Atualmente",
+    "tracksNote": "Áreas que estou estudando e construindo ativamente.",
+    "tracks": [
+      { "name": "Segurança Ofensiva", "detail": "Fundamentos de pentest & exploração" },
+      { "name": "Engenharia Reversa", "detail": "Internals do Windows & análise de binários" },
+      { "name": "Segurança Web", "detail": "Vulnerabilidades comuns & backends seguros" },
+      { "name": "Segurança de Redes", "detail": "Protocolos, varredura & análise de tráfego" }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Perguntas",
+    "title": "Perguntas Frequentes",
+    "items": [
+      {
+        "question": "Com quais tecnologias você trabalha?",
+        "answer": "Principalmente Python, TypeScript, C++ e C#, com FastAPI e Node.js no backend, React no front-end e ferramentas de segurança como Wireshark, Nmap, Scapy e Burp Suite."
+      },
+      {
+        "question": "Quais áreas de segurança mais te interessam?",
+        "answer": "Tanto segurança ofensiva quanto defensiva: pesquisa de exploits e ferramentas ofensivas, além de detecção, hardening, engenharia reversa e análise de redes."
+      },
+      {
+        "question": "Você está aberto a colaborações?",
+        "answer": "Sim. Tenho interesse em projetos de cibersegurança, sistemas backend, criação de ferramentas e colaboração em pesquisa, seja sozinho ou em equipe."
+      },
+      {
+        "question": "Você contribui com open source?",
+        "answer": "Construo e compartilho ferramentas de segurança e automação, e estou aumentando ativamente minha presença em open source. Fique à vontade para trazer ideias."
+      },
+      {
+        "question": "Como podemos trabalhar juntos?",
+        "answer": "Envie uma mensagem pelo formulário de contato ou me encontre no GitHub, LinkedIn, Email, Discord ou WhatsApp. O que for mais fácil para você."
+      }
+    ]
+  },
+  "cta": {
+    "title": "Interessado em segurança ou backend?",
+    "body": "Projetos de cibersegurança, sistemas backend, ferramentas ou colaboração em pesquisa. Vamos conversar.",
+    "primary": "Iniciar uma Conversa",
+    "secondary": "Ver os Projetos"
+  },
+  "contact": {
+    "eyebrow": "Contato",
+    "title": "Vamos Conversar",
+    "lead": "Interessado em projetos de cibersegurança, sistemas backend ou colaboração em pesquisa? Vamos conversar.",
+    "name": "Seu Nome",
+    "namePlaceholder": "João Silva",
+    "email": "Seu Email",
+    "emailPlaceholder": "voce@exemplo.com",
+    "message": "Sua Mensagem",
+    "messagePlaceholder": "Conte sobre seu projeto, ideia ou colaboração…",
+    "topicLegend": "Sobre o que é?",
+    "topics": ["Projeto", "Colaboração", "Pesquisa", "Oportunidade"],
+    "send": "Enviar Mensagem",
+    "sending": "Enviando…",
+    "sent": "Mensagem Enviada",
+    "sentNote": "Obrigado pelo contato! Retorno o mais rápido que conseguir.",
+    "errorNote": "Algo deu errado ao enviar sua mensagem. Tente novamente ou me encontre diretamente abaixo.",
+    "sendAnother": "Enviar outra mensagem",
+    "orReach": "Ou me encontre diretamente",
+    "copy": "Copiar",
+    "copied": "Copiado!",
+    "socials": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Email",
+      "discord": "Discord",
+      "whatsapp": "WhatsApp"
+    }
+  },
+  "footer": {
+    "name": "Kazys Tatarunas",
+    "role": "Desenvolvedor de Segurança & Engenheiro de Software",
+    "tagline": "Construindo sistemas seguros e confiáveis, e as ferramentas ao redor deles.",
+    "primary": "Fale Comigo",
+    "secondary": "Ver Projetos",
+    "rights": "Todos os direitos reservados."
+  }
+}
