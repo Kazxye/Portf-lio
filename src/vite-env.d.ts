@@ -1,21 +1,10 @@
 /// <reference types="vite/client" />
 
-declare module '*.png' {
-  const value: string;
-  export default value;
+interface ImportMetaEnv {
+  /** Web3Forms access key — get a free one at https://web3forms.com (no account needed). */
+  readonly VITE_WEB3FORMS_KEY?: string
 }
 
-declare module '*.jpg' {
-  const value: string;
-  export default value;
-}
-
-declare module '*.jpeg' {
-  const value: string;
-  export default value;
-}
-
-declare module '*.svg' {
-  const value: string;
-  export default value;
+interface ImportMeta {
+  readonly env: ImportMetaEnv
 }
