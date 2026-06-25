@@ -8,7 +8,12 @@
     "bookCall": "Contact Me",
     "menuOpen": "Open menu",
     "menuClose": "Close menu",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "home": "Home",
+    "contact": "Contact",
+    "availability": "Available for projects",
+    "locationCity": "São Paulo, SP",
+    "locationCountry": "Brazil"
   },
   "lang": {
     "switch": "Switch language",
@@ -16,7 +21,6 @@
     "pt": "PT"
   },
   "hero": {
-    "available": "Available for work & collaboration",
     "role": "Security Developer & Software Engineer",
     "name": "Kazys",
     "subtitle": "Building secure systems, automation tools and cybersecurity solutions that solve real problems.",

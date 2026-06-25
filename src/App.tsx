@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import Navbar from './components/layout/Navbar'
+import NavRail from './components/layout/NavRail'
 import Footer from './components/layout/Footer'
 import Hero from './components/sections/Hero'
 import Stats from './components/sections/Stats'
@@ -33,6 +34,7 @@ export default function App() {
       </a>
 
       <Navbar />
+      <NavRail />
 
       <main>
         <Hero />

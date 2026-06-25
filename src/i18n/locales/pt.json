@@ -8,7 +8,12 @@
     "bookCall": "Fale Comigo",
     "menuOpen": "Abrir menu",
     "menuClose": "Fechar menu",
-    "skip": "Pular para o conteúdo"
+    "skip": "Pular para o conteúdo",
+    "home": "Início",
+    "contact": "Contato",
+    "availability": "Disponível para projetos",
+    "locationCity": "São Paulo, SP",
+    "locationCountry": "Brasil"
   },
   "lang": {
     "switch": "Mudar idioma",
@@ -16,7 +21,6 @@
     "pt": "PT"
   },
   "hero": {
-    "available": "Disponível para trabalho & colaboração",
     "role": "Desenvolvedor de Segurança & Engenheiro de Software",
     "name": "Kazys",
     "subtitle": "Construindo sistemas seguros, ferramentas de automação e soluções de cibersegurança que resolvem problemas reais.",

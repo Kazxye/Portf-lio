@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import type { ExpertiseItem } from '../../data/content'
 import Section from '../ui/Section'
-import { ArrowUpRight, Spark } from '../ui/Icon'
+import { ArrowUpRight, Layers } from '../ui/Icon'
 
 /**
  * Expertise — a single dark card listing core security/engineering areas as
@@ -16,7 +16,7 @@ export default function Services() {
       <div className="surface overflow-hidden p-2">
         <div className="flex items-center gap-2 px-5 pt-5">
           <span className="grid h-7 w-7 place-items-center rounded-md bg-ember-500/15 text-ember-400">
-            <Spark width={16} height={16} />
+            <Layers width={16} height={16} />
           </span>
           <span className="text-xs uppercase tracking-[0.2em] text-sand/60">
             {t('expertise.eyebrow')}

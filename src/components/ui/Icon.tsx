@@ -85,6 +85,80 @@ export const Mail = (props: IconProps) => (
   </svg>
 )
 
+export const Shield = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+  </svg>
+)
+
+export const Layers = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="m12 2 9 5-9 5-9-5 9-5Z" />
+    <path d="m3 12 9 5 9-5" />
+    <path d="m3 17 9 5 9-5" />
+  </svg>
+)
+
+export const Compass = (props: IconProps) => (
+  <svg {...base(props)}>
+    <circle cx="12" cy="12" r="10" />
+    <path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12Z" />
+  </svg>
+)
+
+export const Search = (props: IconProps) => (
+  <svg {...base(props)}>
+    <circle cx="11" cy="11" r="7" />
+    <path d="m21 21-4.3-4.3" />
+  </svg>
+)
+
+export const Code = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="m16 18 6-6-6-6" />
+    <path d="m8 6-6 6 6 6" />
+  </svg>
+)
+
+export const PenLine = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="M12 20h9" />
+    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+  </svg>
+)
+
+export const Home = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="m3 10.5 9-7 9 7" />
+    <path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5" />
+    <path d="M10 21v-6h4v6" />
+  </svg>
+)
+
+export const Briefcase = (props: IconProps) => (
+  <svg {...base(props)}>
+    <rect x="3" y="7" width="18" height="13" rx="2" />
+    <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+    <path d="M3 12h18" />
+  </svg>
+)
+
+export const Workflow = (props: IconProps) => (
+  <svg {...base(props)}>
+    <rect x="3" y="4" width="7" height="7" rx="1" />
+    <rect x="14" y="13" width="7" height="7" rx="1" />
+    <path d="M10 7.5h4a3 3 0 0 1 3 3V13" />
+  </svg>
+)
+
+export const HelpCircle = (props: IconProps) => (
+  <svg {...base(props)}>
+    <circle cx="12" cy="12" r="10" />
+    <path d="M9.2 9a3 3 0 0 1 5.6 1c0 2-3 2.5-3 4" />
+    <path d="M12 17h.01" />
+  </svg>
+)
+
 /* ---- Brand glyphs (filled) ---- */
 
 const brandBase = (props: IconProps): IconProps => ({
@@ -140,6 +214,16 @@ export const icons = {
   Quote,
   Globe,
   Mail,
+  Shield,
+  Layers,
+  Compass,
+  Search,
+  Code,
+  PenLine,
+  Home,
+  Briefcase,
+  Workflow,
+  HelpCircle,
   GitHub,
   LinkedIn,
   Discord,
