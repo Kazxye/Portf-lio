@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { navLinks } from '../../data/content'
 import Button from '../ui/Button'
 import LanguageSwitcher from '../ui/LanguageSwitcher'
-import { Menu, Close, Shield } from '../ui/Icon'
+import { Menu, Close } from '../ui/Icon'
+import Signature from '../ui/Signature'
 
 /**
  * Sticky top navigation. Collapses into a slide-down menu on mobile and
@@ -37,14 +38,13 @@ export default function Navbar() {
           scrolled ? 'bg-ink-900/90 backdrop-blur-md' : 'bg-ink-900/60 backdrop-blur'
         }`}
       >
-        {/* Brand: mark + name */}
-        <a href="#top" className="flex items-center gap-2.5 rounded-xl pl-1 pr-2">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ember-500 text-white">
-            <Shield width={18} height={18} />
-          </span>
-          <span className="brand-name font-display text-lg font-semibold tracking-tight">
-            {t('hero.name')}
-          </span>
+        {/* Brand: signature */}
+        <a
+          href="#top"
+          aria-label={t('hero.name')}
+          className="rounded-xl px-1.5 pb-1.5 pt-1"
+        >
+          <Signature className="text-[28px]" />
         </a>
 
         {/* Center: availability pill */}
