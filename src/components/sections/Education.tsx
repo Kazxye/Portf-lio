@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import type { Certificate, EducationTrack } from '../../data/content'
 import Section from '../ui/Section'
 import SectionHeading from '../ui/SectionHeading'
-import { Spark, Check } from '../ui/Icon'
+import { Compass, Check } from '../ui/Icon'
 
 /**
  * Education & Learning — replaces the original pricing section. A featured
@@ -68,7 +68,7 @@ export default function Education() {
       <div className="mt-8">
         <div className="flex items-center gap-2">
           <span className="grid h-7 w-7 place-items-center rounded-md bg-ember-500/15 text-ember-400">
-            <Spark width={16} height={16} />
+            <Compass width={16} height={16} />
           </span>
           <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-sand/70">
             {t('education.tracksTitle')}

@@ -8,7 +8,9 @@
     "bookCall": "Contact Me",
     "menuOpen": "Open menu",
     "menuClose": "Close menu",
-    "skip": "Skip to content"
+    "skip": "Skip to content",
+    "availability": "Available",
+    "location": "São Paulo, SP, Brazil"
   },
   "lang": {
     "switch": "Switch language",

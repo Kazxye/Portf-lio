@@ -85,6 +85,48 @@ export const Mail = (props: IconProps) => (
   </svg>
 )
 
+export const Shield = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+  </svg>
+)
+
+export const Layers = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="m12 2 9 5-9 5-9-5 9-5Z" />
+    <path d="m3 12 9 5 9-5" />
+    <path d="m3 17 9 5 9-5" />
+  </svg>
+)
+
+export const Compass = (props: IconProps) => (
+  <svg {...base(props)}>
+    <circle cx="12" cy="12" r="10" />
+    <path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12Z" />
+  </svg>
+)
+
+export const Search = (props: IconProps) => (
+  <svg {...base(props)}>
+    <circle cx="11" cy="11" r="7" />
+    <path d="m21 21-4.3-4.3" />
+  </svg>
+)
+
+export const Code = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="m16 18 6-6-6-6" />
+    <path d="m8 6-6 6 6 6" />
+  </svg>
+)
+
+export const PenLine = (props: IconProps) => (
+  <svg {...base(props)}>
+    <path d="M12 20h9" />
+    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+  </svg>
+)
+
 /* ---- Brand glyphs (filled) ---- */
 
 const brandBase = (props: IconProps): IconProps => ({
@@ -140,6 +182,12 @@ export const icons = {
   Quote,
   Globe,
   Mail,
+  Shield,
+  Layers,
+  Compass,
+  Search,
+  Code,
+  PenLine,
   GitHub,
   LinkedIn,
   Discord,

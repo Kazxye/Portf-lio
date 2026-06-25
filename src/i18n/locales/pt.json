@@ -8,7 +8,9 @@
     "bookCall": "Fale Comigo",
     "menuOpen": "Abrir menu",
     "menuClose": "Fechar menu",
-    "skip": "Pular para o conteúdo"
+    "skip": "Pular para o conteúdo",
+    "availability": "Disponível",
+    "location": "São Paulo, SP, Brasil"
   },
   "lang": {
     "switch": "Mudar idioma",

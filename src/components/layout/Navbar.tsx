@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { navLinks } from '../../data/content'
 import Button from '../ui/Button'
 import LanguageSwitcher from '../ui/LanguageSwitcher'
-import { Menu, Close, Spark } from '../ui/Icon'
+import { Menu, Close, Shield } from '../ui/Icon'
 
 /**
  * Sticky top navigation. Collapses into a slide-down menu on mobile and
@@ -33,34 +33,46 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6 sm:pt-4">
       <nav
         aria-label="Primary"
-        className={`mx-auto flex max-w-5xl items-center justify-between rounded-full border border-white/10 px-3 py-2 transition-colors duration-300 ${
+        className={`mx-auto flex max-w-5xl items-center justify-between rounded-2xl border border-white/10 px-3 py-2 transition-colors duration-300 ${
           scrolled ? 'bg-ink-900/90 backdrop-blur-md' : 'bg-ink-900/60 backdrop-blur'
         }`}
       >
-        <a
-          href="#top"
-          className="flex items-center gap-2 rounded-full pl-2 pr-1 text-sm font-semibold text-white"
-        >
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-ember-500 text-white">
-            <Spark width={16} height={16} />
+        {/* Brand: name on top, availability + location beneath */}
+        <a href="#top" className="flex items-center gap-2.5 rounded-xl pl-1 pr-2">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ember-500 text-white">
+            <Shield width={18} height={18} />
           </span>
-          <span className="font-display">{t('hero.name')}</span>
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-sm font-semibold text-white">
+              {t('hero.name')}
+            </span>
+            <span className="mt-1 hidden items-center gap-1.5 text-[11px] text-sand/55 sm:flex">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              </span>
+              {t('nav.availability')} · {t('nav.location')}
+            </span>
+          </span>
         </a>
 
-        <ul className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className="rounded-full px-3.5 py-2 text-sm text-sand/80 transition-colors hover:bg-white/5 hover:text-white"
-              >
-                {t(`nav.${link.key}`)}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {/* Right cluster: navigation + language + contact */}
+        <div className="flex items-center gap-1.5">
+          <ul className="hidden items-center gap-0.5 md:flex">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="rounded-full px-3 py-2 text-sm text-sand/80 transition-colors hover:bg-white/5 hover:text-white"
+                >
+                  {t(`nav.${link.key}`)}
+                </a>
+              </li>
+            ))}
+          </ul>
 
-        <div className="flex items-center gap-2">
+          <span className="mx-1 hidden h-5 w-px bg-white/10 md:block" />
+
           <LanguageSwitcher />
           <Button href="#contact" className="hidden sm:inline-flex">
             {t('nav.bookCall')}
