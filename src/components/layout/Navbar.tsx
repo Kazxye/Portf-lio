@@ -33,57 +33,50 @@ export default function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:px-6 sm:pt-4">
       <nav
         aria-label="Primary"
-        className={`mx-auto flex max-w-5xl items-center justify-between rounded-2xl border border-white/10 px-3 py-2 transition-colors duration-300 ${
+        className={`relative mx-auto flex max-w-5xl items-center justify-between rounded-2xl border border-white/10 px-3 py-2 transition-colors duration-300 ${
           scrolled ? 'bg-ink-900/90 backdrop-blur-md' : 'bg-ink-900/60 backdrop-blur'
         }`}
       >
-        {/* Brand: name on top, availability + location beneath */}
+        {/* Brand: mark + name */}
         <a href="#top" className="flex items-center gap-2.5 rounded-xl pl-1 pr-2">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ember-500 text-white">
             <Shield width={18} height={18} />
           </span>
-          <span className="flex flex-col leading-none">
-            <span className="font-display text-sm font-semibold text-white">
-              {t('hero.name')}
-            </span>
-            <span className="mt-1 hidden items-center gap-1.5 text-[11px] text-sand/55 sm:flex">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              </span>
-              {t('nav.availability')} · {t('nav.location')}
-            </span>
+          <span className="font-display text-base font-semibold text-white">
+            {t('hero.name')}
           </span>
         </a>
 
-        {/* Right cluster: navigation + language + contact */}
-        <div className="flex items-center gap-1.5">
-          <ul className="hidden items-center gap-0.5 md:flex">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="rounded-full px-3 py-2 text-sm text-sand/80 transition-colors hover:bg-white/5 hover:text-white"
-                >
-                  {t(`nav.${link.key}`)}
-                </a>
-              </li>
-            ))}
-          </ul>
+        {/* Center: availability pill */}
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs text-sand/80 md:flex">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/70" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+          </span>
+          {t('nav.availability')}
+        </div>
 
-          <span className="mx-1 hidden h-5 w-px bg-white/10 md:block" />
+        {/* Right: location + language + mobile toggle */}
+        <div className="flex items-center gap-3">
+          <div className="hidden text-right leading-tight md:block">
+            <span className="block text-xs font-medium text-white">
+              {t('nav.locationCity')}
+            </span>
+            <span className="block text-[11px] text-sand/50">
+              {t('nav.locationCountry')}
+            </span>
+          </div>
+
+          <span className="hidden h-7 w-px bg-white/10 md:block" />
 
           <LanguageSwitcher />
-          <Button href="#contact" className="hidden sm:inline-flex">
-            {t('nav.bookCall')}
-          </Button>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? t('nav.menuClose') : t('nav.menuOpen')}
-            className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-white md:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-white lg:hidden"
           >
             {open ? <Close /> : <Menu />}
           </button>
@@ -94,7 +87,7 @@ export default function Navbar() {
       {open && (
         <div
           id="mobile-menu"
-          className="mx-auto mt-2 max-w-5xl rounded-3xl border border-white/10 bg-ink-900/95 p-4 backdrop-blur-md md:hidden"
+          className="mx-auto mt-2 max-w-5xl rounded-3xl border border-white/10 bg-ink-900/95 p-4 backdrop-blur-md lg:hidden"
         >
           <ul className="flex flex-col">
             {navLinks.map((link) => (

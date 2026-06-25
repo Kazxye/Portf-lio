@@ -9,8 +9,11 @@
     "menuOpen": "Abrir menu",
     "menuClose": "Fechar menu",
     "skip": "Pular para o conteúdo",
-    "availability": "Disponível",
-    "location": "São Paulo, SP, Brasil"
+    "home": "Início",
+    "contact": "Contato",
+    "availability": "Disponível para projetos",
+    "locationCity": "São Paulo, SP",
+    "locationCountry": "Brasil"
   },
   "lang": {
     "switch": "Mudar idioma",

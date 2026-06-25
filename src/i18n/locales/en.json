@@ -9,8 +9,11 @@
     "menuOpen": "Open menu",
     "menuClose": "Close menu",
     "skip": "Skip to content",
-    "availability": "Available",
-    "location": "São Paulo, SP, Brazil"
+    "home": "Home",
+    "contact": "Contact",
+    "availability": "Available for projects",
+    "locationCity": "São Paulo, SP",
+    "locationCountry": "Brazil"
   },
   "lang": {
     "switch": "Switch language",
