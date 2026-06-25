@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import type { TechCategory } from '../../data/content'
+import { useReveal } from '../../hooks/useReveal'
 
 /**
  * Tools marquee — an infinitely scrolling row of technologies, flattened from
@@ -11,9 +12,14 @@ export default function Brands() {
   const categories = t('tech.categories', { returnObjects: true }) as TechCategory[]
   const tools = Array.from(new Set(categories.flatMap((c) => c.items)))
   const row = [...tools, ...tools]
+  const { ref, visible } = useReveal<HTMLElement>()
 
   return (
-    <section aria-label={t('tools.label')} className="px-5 py-10 sm:px-6">
+    <section
+      ref={ref}
+      aria-label={t('tools.label')}
+      className={`reveal ${visible ? 'is-visible' : ''} px-5 py-10 sm:px-6`}
+    >
       <p className="mb-6 text-center text-xs uppercase tracking-[0.25em] text-sand/40">
         {t('tools.label')}
       </p>
