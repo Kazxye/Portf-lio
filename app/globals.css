@@ -1,0 +1,489 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #08090a;
+  --color-surface: #0c0e10;
+  --color-surface-2: #111418;
+  --color-fg: #ecedef;
+  --color-fg-2: #8a9098;
+  /* The brief's #626871 is 3.5:1 on the background, below WCAG AA for small
+     text. Muted text uses #747a83 (4.6:1); #626871 is kept for decoration. */
+  --color-fg-3: #747a83;
+  --color-fg-4: #626871;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.14);
+  --color-edge: #2b3036;
+  --color-accent: #67e8f9;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, 'SFMono-Regular', monospace;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    color-scheme: dark;
+    /* Keeps anchored sections clear of the sticky header. */
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: rgb(103 232 249 / 0.24);
+    color: var(--color-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Programmatic focus targets (skip link, command menu jumps) should not
+     draw a ring around a whole section. */
+  [tabindex='-1']:focus {
+    outline: none;
+  }
+}
+
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding-inline: 1.5rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 0.75rem;
+    z-index: 60;
+    transform: translateY(-200%);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 6px;
+    background: var(--color-surface-2);
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8125rem;
+    color: var(--color-fg);
+  }
+
+  .skip-link:focus-visible {
+    transform: none;
+  }
+
+  /* ---------- Header ---------- */
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border-bottom: 1px solid var(--color-line);
+    background-color: rgb(8 9 10 / 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .scroll-progress {
+    display: none;
+  }
+
+  /* Header state and reading progress are driven by the scroll position with
+     no JavaScript. Browsers without scroll timelines keep the static header. */
+  @supports (animation-timeline: scroll()) {
+    /* Base = top-of-page state. It also covers pages too short to scroll,
+       where the scroll timeline is inactive and the animation never applies. */
+    .site-header {
+      border-bottom-color: transparent;
+      background-color: rgb(8 9 10 / 0);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      animation: header-settle linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 96px;
+    }
+
+    .scroll-progress {
+      display: block;
+      position: absolute;
+      inset-inline: 0;
+      bottom: -1px;
+      height: 1px;
+      background-color: rgb(103 232 249 / 0.45);
+      transform-origin: 0 50%;
+      transform: scaleX(0);
+      animation: progress linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+
+  .monogram {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--color-fg);
+    padding-block: 0.5rem;
+  }
+
+  .nav-link {
+    color: var(--color-fg-2);
+    transition: color 160ms ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-fg);
+  }
+
+  /* ---------- Actions ---------- */
+
+  .btn {
+    display: inline-flex;
+    height: 2.5rem;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 6px;
+    background-color: var(--color-surface);
+    padding-inline: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-fg);
+    transition:
+      border-color 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .btn:hover {
+    border-color: rgb(255 255 255 / 0.28);
+    background-color: var(--color-surface-2);
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.875rem;
+    color: var(--color-fg-2);
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition:
+      color 160ms ease,
+      text-decoration-color 160ms ease;
+  }
+
+  .text-link:hover {
+    color: var(--color-fg);
+    text-decoration-color: var(--color-line-strong);
+  }
+
+  .text-link svg {
+    color: var(--color-fg-3);
+    transition: color 160ms ease, transform 160ms ease;
+  }
+
+  .text-link:hover svg {
+    color: var(--color-accent);
+    transform: translate(1px, -1px);
+  }
+
+  /* ---------- Load sequence ---------- */
+
+  /* One orchestrated entrance for the hero; --i sets the stagger slot. */
+  .enter {
+    animation: rise 760ms var(--ease-out-quart) both;
+    animation-delay: calc(var(--i, 0) * 70ms);
+  }
+
+  /* ---------- Work topology ---------- */
+
+  .topology .edge {
+    fill: none;
+    stroke: var(--color-edge);
+    stroke-width: 1;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw 1100ms var(--ease-out-quart) forwards;
+    animation-delay: calc(420ms + var(--i, 0) * 110ms);
+    transition: stroke 200ms ease;
+  }
+
+  .topology .node-mark {
+    fill: var(--color-bg);
+    stroke: var(--color-fg-4);
+    transition:
+      fill 200ms ease,
+      stroke 200ms ease;
+  }
+
+  .topology .branch-content {
+    opacity: 0;
+    animation: fade-in 500ms ease-out forwards;
+    animation-delay: calc(1100ms + var(--i, 0) * 110ms);
+  }
+
+  .topology .node-name {
+    fill: var(--color-fg);
+    font-size: 13px;
+    letter-spacing: -0.01em;
+  }
+
+  .topology .node-domain {
+    fill: var(--color-fg-3);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+  }
+
+  .topology .branch {
+    outline: none;
+  }
+
+  .topology .branch:hover .edge,
+  .topology .branch:focus-visible .edge {
+    stroke: var(--color-accent);
+  }
+
+  .topology .branch:hover .node-mark,
+  .topology .branch:focus-visible .node-mark {
+    fill: var(--color-accent);
+    stroke: var(--color-accent);
+  }
+
+  .topology .branch:focus-visible .focus-ring {
+    stroke: var(--color-accent);
+  }
+
+  .topology .packet {
+    fill: var(--color-accent);
+  }
+
+  /* ---------- Command menu ---------- */
+
+  .cmd-trigger {
+    display: inline-flex;
+    height: 2rem;
+    align-items: center;
+    gap: 0.25rem;
+    border: 1px solid var(--color-line);
+    border-radius: 6px;
+    padding-inline: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-fg-2);
+    transition:
+      border-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .cmd-trigger:hover {
+    border-color: var(--color-line-strong);
+    color: var(--color-fg);
+  }
+
+  .cmd-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background-color: rgb(4 5 6 / 0.76);
+  }
+
+  .cmd-panel {
+    position: fixed;
+    left: 50%;
+    top: 14vh;
+    z-index: 51;
+    width: min(35rem, calc(100vw - 1.5rem));
+    transform: translateX(-50%);
+    overflow: hidden;
+    border: 1px solid var(--color-line-strong);
+    border-radius: 10px;
+    background-color: var(--color-surface);
+    box-shadow: 0 24px 64px -24px rgb(0 0 0 / 0.7);
+  }
+
+  .cmd-panel[data-state='open'] {
+    animation: panel-in 160ms var(--ease-out-quart);
+  }
+
+  .cmd-overlay[data-state='open'] {
+    animation: fade-in 160ms ease-out;
+  }
+
+  .cmd-panel [cmdk-input] {
+    width: 100%;
+    height: 3.25rem;
+    border-bottom: 1px solid var(--color-line);
+    background: transparent;
+    padding-inline: 1.125rem;
+    font-size: 0.9375rem;
+    color: var(--color-fg);
+    outline: none;
+  }
+
+  .cmd-panel [cmdk-input]::placeholder {
+    color: var(--color-fg-3);
+  }
+
+  .cmd-panel [cmdk-list] {
+    max-height: min(22rem, 56vh);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.375rem;
+  }
+
+  .cmd-panel [cmdk-group-heading] {
+    padding: 0.75rem 0.75rem 0.375rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-fg-3);
+  }
+
+  .cmd-panel [cmdk-item] {
+    position: relative;
+    display: flex;
+    min-height: 2.5rem;
+    cursor: pointer;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-radius: 6px;
+    padding-inline: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-fg-2);
+    user-select: none;
+  }
+
+  .cmd-panel [cmdk-item][data-selected='true'] {
+    background-color: var(--color-surface-2);
+    color: var(--color-fg);
+  }
+
+  .cmd-panel [cmdk-item][data-selected='true']::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.625rem;
+    bottom: 0.625rem;
+    width: 2px;
+    border-radius: 1px;
+    background-color: var(--color-accent);
+  }
+
+  .cmd-panel [cmdk-empty] {
+    padding: 1.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-fg-3);
+  }
+
+  .cmd-hint {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-fg-3);
+    white-space: nowrap;
+  }
+
+  .cmd-hint[data-state='copied'] {
+    color: var(--color-accent);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes header-settle {
+  from {
+    border-bottom-color: transparent;
+    background-color: rgb(8 9 10 / 0);
+    backdrop-filter: blur(0);
+  }
+  to {
+    border-bottom-color: var(--color-line);
+    background-color: rgb(8 9 10 / 0.8);
+    backdrop-filter: blur(12px);
+  }
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter,
+  .topology .branch-content,
+  .cmd-panel[data-state='open'],
+  .cmd-overlay[data-state='open'] {
+    animation: none;
+    opacity: 1;
+  }
+
+  .topology .edge {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .topology .packet {
+    display: none;
+  }
+}

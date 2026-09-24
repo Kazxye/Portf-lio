@@ -1,21 +1,8 @@
 node_modules
-dist
-dist-ssr
-*.local
-.DS_Store
-.vite
+.next
+out
+.vercel
+.env*
 *.tsbuildinfo
-
-# Claude Code local settings
-.claude/
-
-# Local env (keep .env.example tracked)
-.env
-.env.*
-!.env.example
-
-# Editor
-.vscode/*
-!.vscode/extensions.json
-.idea
-.claude/
+next-env.d.ts
+.DS_Store
