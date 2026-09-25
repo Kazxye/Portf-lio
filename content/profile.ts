@@ -1,24 +1,29 @@
-// Single source for identity data. Everything here is verified against the
-// current site, the CV and the GitHub profile; do not add unconfirmed claims.
 export const profile = {
   name: 'Kazys Tatarunas',
-  role: 'Security-focused software engineer',
+  role: 'Security-minded software engineer',
   summary:
-    'I write backend systems, network tools and security software. I build offensive tools to understand what defenders need to catch.',
+    'Building backend systems and offensive & defensive security tooling. Exploring how systems work, where they break, and how to protect them.',
   location: 'São Paulo, Brazil',
-  education: {
-    program: 'Software Engineering',
-    school: 'FIAP',
-    start: 2025,
-    end: 2028,
-  },
-  focus: 'Defensive security and detection',
+  education: { program: 'Software Engineering', school: 'FIAP', end: 2028 },
+  focus: 'Security, systems & backend engineering',
   email: 'kazysdzigantatarunas@outlook.com',
-  siteUrl: 'https://kazys.dev',
+  siteUrl: 'https://www.kazys.dev',
   links: {
     github: 'https://github.com/Kazxye',
     linkedin: 'https://www.linkedin.com/in/kazystatarunas',
-    // Kept at the old path so links already shared to the CV keep working.
     resume: '/CV_Kazys_Tatarunas.pdf',
+    whatsapp: 'https://wa.me/5511934812006',
   },
+  discord: 'kazys_',
 } as const
+
+export const stackGroups = [
+  { name: 'Languages', items: ['Python', 'TypeScript', 'C++', 'JavaScript'] },
+  { name: 'Backend', items: ['FastAPI', 'PostgreSQL', 'Redis', 'REST APIs'] },
+  { name: 'Frontend', items: ['React', 'Next.js', 'Tailwind CSS'] },
+  {
+    name: 'Systems / Security',
+    items: ['WinAPI', 'Scapy', 'Web Crypto', 'Wireshark', 'Nmap'],
+  },
+  { name: 'Infrastructure', items: ['Linux', 'Docker', 'Nginx', 'Git'] },
+]

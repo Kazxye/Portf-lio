@@ -26,13 +26,23 @@ const securityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   { key: 'X-Frame-Options', value: 'DENY' },
-  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()' },
-  { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains' },
-  ...(isProduction ? [{ key: 'Content-Security-Policy', value: contentSecurityPolicy }] : []),
+  {
+    key: 'Permissions-Policy',
+    value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
+  },
+  {
+    key: 'Strict-Transport-Security',
+    value: 'max-age=63072000; includeSubDomains',
+  },
+  ...(isProduction
+    ? [{ key: 'Content-Security-Policy', value: contentSecurityPolicy }]
+    : []),
 ]
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  agentRules: false,
+  devIndicators: false,
   reactStrictMode: true,
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }]

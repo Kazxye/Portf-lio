@@ -1,7 +1,14 @@
 import type { MetadataRoute } from 'next'
 import { profile } from '@/content/profile'
+import { projects } from '@/content/projects'
 
-// Case study routes are appended here when they ship.
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [{ url: `${profile.siteUrl}/`, lastModified: new Date(), changeFrequency: 'monthly', priority: 1 }]
+  return [
+    { url: `${profile.siteUrl}/`, changeFrequency: 'monthly', priority: 1 },
+    ...projects.map((project) => ({
+      url: `${profile.siteUrl}/projects/${project.slug}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+  ]
 }

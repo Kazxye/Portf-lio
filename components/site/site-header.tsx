@@ -7,13 +7,20 @@ import { CommandMenu } from './command-menu'
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <div className="container-page flex h-14 items-center justify-between gap-6">
-        <Link href="/" className="monogram" aria-label={`${profile.name}, home`}>
-          K<span className="text-accent">/</span>
+      <div className="container-page flex h-18 items-center justify-between gap-6">
+        <Link
+          href="/"
+          className="monogram"
+          aria-label={`${profile.name}, home`}
+        >
+          Kazys<span className="text-accent">/</span>
         </Link>
 
         <div className="flex items-center gap-7">
-          <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">
+          <nav
+            aria-label="Primary"
+            className="hidden items-center gap-7 md:flex"
+          >
             <ul className="flex items-center gap-6 text-[0.8125rem]">
               {sections.map((section) => (
                 <li key={section.id}>
@@ -23,13 +30,18 @@ export function SiteHeader() {
                 </li>
               ))}
             </ul>
-            <span aria-hidden="true" className="h-4 w-px bg-line" />
-            <ul className="flex items-center gap-5 [&_.text-link]:text-[0.8125rem]">
+            <span
+              aria-hidden="true"
+              className="hidden h-4 w-px bg-line lg:block"
+            />
+            <ul className="hidden items-center gap-5 lg:flex [&_.text-link]:text-[0.8125rem]">
               <li>
                 <ExternalLink href={profile.links.github}>GitHub</ExternalLink>
               </li>
               <li>
-                <ExternalLink href={profile.links.linkedin}>LinkedIn</ExternalLink>
+                <ExternalLink href={profile.links.linkedin}>
+                  LinkedIn
+                </ExternalLink>
               </li>
             </ul>
           </nav>

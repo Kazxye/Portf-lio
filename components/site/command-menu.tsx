@@ -5,6 +5,7 @@ import { Command } from 'cmdk'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { sections } from '@/content/navigation'
+import { projects } from '@/content/projects'
 import { profile } from '@/content/profile'
 
 type CopyState = 'idle' | 'copied' | 'failed'
@@ -16,24 +17,38 @@ const isApplePlatform = () => /Mac|iPhone|iPad|iPod/.test(navigator.userAgent)
 const isApplePlatformOnServer = () => true
 
 function log(level: 'warn' | 'error', event: string, detail?: unknown) {
-  console[level](JSON.stringify({ component: 'command-menu', event, detail: String(detail ?? '') }))
+  console[level](
+    JSON.stringify({
+      component: 'command-menu',
+      event,
+      detail: String(detail ?? ''),
+    }),
+  )
 }
 
 export function CommandMenu() {
   const [open, setOpen] = useState(false)
   const [copyState, setCopyState] = useState<CopyState>('idle')
-  const isApple = useSyncExternalStore(subscribeNoop, isApplePlatform, isApplePlatformOnServer)
+  const isApple = useSyncExternalStore(
+    subscribeNoop,
+    isApplePlatform,
+    isApplePlatformOnServer,
+  )
   const router = useRouter()
   const pathname = usePathname()
 
   // What to run once the dialog has fully closed (scroll lock released).
+  const inputRef = useRef<HTMLInputElement>(null)
   const pendingAction = useRef<(() => void) | null>(null)
   // Where focus was before opening, so it can be restored for any trigger,
   // including the keyboard shortcut.
   const returnFocusTo = useRef<HTMLElement | null>(null)
 
   function openMenu() {
-    returnFocusTo.current = document.activeElement instanceof HTMLElement ? document.activeElement : null
+    returnFocusTo.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null
     setCopyState('idle')
     setOpen(true)
   }
@@ -45,7 +60,8 @@ export function CommandMenu() {
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key.toLowerCase() !== 'k' || !(event.metaKey || event.ctrlKey)) return
+      if (event.key.toLowerCase() !== 'k' || !(event.metaKey || event.ctrlKey))
+        return
       event.preventDefault()
       if (open) {
         closeMenu()
@@ -110,8 +126,16 @@ export function CommandMenu() {
   }[copyState]
 
   return (
-    <Dialog.Root open={open} onOpenChange={(next) => (next ? openMenu() : closeMenu())}>
-      <button type="button" onClick={openMenu} className="cmd-trigger hidden md:inline-flex" aria-label="Open command menu">
+    <Dialog.Root
+      open={open}
+      onOpenChange={(next) => (next ? openMenu() : closeMenu())}
+    >
+      <button
+        type="button"
+        onClick={openMenu}
+        className="cmd-trigger hidden md:inline-flex"
+        aria-label="Open command menu"
+      >
         <kbd className="font-mono">{isApple ? '⌘' : 'Ctrl'}</kbd>
         <kbd className="font-mono">K</kbd>
       </button>
@@ -129,6 +153,10 @@ export function CommandMenu() {
         <Dialog.Content
           className="cmd-panel"
           aria-describedby={undefined}
+          onOpenAutoFocus={(event) => {
+            event.preventDefault()
+            inputRef.current?.focus()
+          }}
           onCloseAutoFocus={(event) => {
             event.preventDefault()
             const action = pendingAction.current
@@ -142,13 +170,25 @@ export function CommandMenu() {
           }}
         >
           <Dialog.Title className="sr-only">Command menu</Dialog.Title>
+          <Dialog.Close className="cmd-close" aria-label="Close command menu">
+            Esc
+          </Dialog.Close>
           <Command label="Command menu" loop>
-            <Command.Input placeholder="Type a command or search" />
+            <Command.Input
+              ref={inputRef}
+              placeholder="Type a command or search"
+            />
             <Command.List>
-              <Command.Empty>Nothing matches. Try “work” or “github”.</Command.Empty>
+              <Command.Empty>
+                Nothing matches. Try “work” or “github”.
+              </Command.Empty>
 
               <Command.Group heading="Navigate">
-                <Command.Item value="home" keywords={['top', 'start']} onSelect={() => closeThen(() => goToSection('top'))}>
+                <Command.Item
+                  value="home"
+                  keywords={['top', 'start']}
+                  onSelect={() => closeThen(() => goToSection('top'))}
+                >
                   Home
                 </Command.Item>
                 {sections.map((section) => (
@@ -163,39 +203,82 @@ export function CommandMenu() {
                 ))}
               </Command.Group>
 
+              <Command.Group heading="Case studies">
+                {projects.map((project) => (
+                  <Command.Item
+                    key={project.slug}
+                    value={project.name}
+                    keywords={[project.category, project.domain]}
+                    onSelect={() =>
+                      closeThen(() => router.push(`/projects/${project.slug}`))
+                    }
+                  >
+                    {project.name}
+                    <span className="cmd-hint">{project.category}</span>
+                  </Command.Item>
+                ))}
+              </Command.Group>
+
               <Command.Group heading="Links">
-                <Command.Item value="github" keywords={['code', 'repositories', 'source']} onSelect={() => openExternal(profile.links.github)}>
+                <Command.Item
+                  value="github"
+                  keywords={['code', 'repositories', 'source']}
+                  onSelect={() => openExternal(profile.links.github)}
+                >
                   GitHub
                   <span className="cmd-hint">github.com/Kazxye</span>
                 </Command.Item>
-                <Command.Item value="linkedin" keywords={['profile', 'career']} onSelect={() => openExternal(profile.links.linkedin)}>
+                <Command.Item
+                  value="linkedin"
+                  keywords={['profile', 'career']}
+                  onSelect={() => openExternal(profile.links.linkedin)}
+                >
                   LinkedIn
                   <span className="cmd-hint">in/kazystatarunas</span>
                 </Command.Item>
-                <Command.Item value="resume" keywords={['cv', 'pdf', 'curriculum']} onSelect={() => openExternal(profile.links.resume)}>
+                <Command.Item
+                  value="resume"
+                  keywords={['cv', 'pdf', 'curriculum']}
+                  onSelect={() => openExternal(profile.links.resume)}
+                >
                   Resume
                   <span className="cmd-hint">PDF</span>
                 </Command.Item>
               </Command.Group>
 
               <Command.Group heading="Email">
-                <Command.Item value="copy email address" keywords={['contact', 'mail']} onSelect={copyEmail}>
+                <Command.Item
+                  value="copy email address"
+                  keywords={['contact', 'mail']}
+                  onSelect={copyEmail}
+                >
                   Copy email address
-                  <span className="cmd-hint" data-state={copyState} aria-live="polite">
+                  <span
+                    className="cmd-hint"
+                    data-state={copyState}
+                    aria-live="polite"
+                  >
                     {emailHint}
                   </span>
                 </Command.Item>
                 <Command.Item
                   value="send email"
                   keywords={['contact', 'mail', 'write']}
-                  onSelect={() => closeThen(() => window.location.assign(`mailto:${profile.email}`))}
+                  onSelect={() =>
+                    closeThen(() =>
+                      window.location.assign(`mailto:${profile.email}`),
+                    )
+                  }
                 >
                   Send email
                 </Command.Item>
               </Command.Group>
             </Command.List>
           </Command>
-          <p aria-hidden="true" className="hidden border-t border-line px-4 py-2.5 font-mono text-[0.6875rem] text-fg-3 md:block">
+          <p
+            aria-hidden="true"
+            className="hidden border-t border-line px-4 py-2.5 font-mono text-[0.6875rem] text-fg-3 md:block"
+          >
             ↑↓ to move, ↵ to select, esc to close
           </p>
         </Dialog.Content>

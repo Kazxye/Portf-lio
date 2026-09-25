@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import type { ReactNode } from 'react'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
+import { SiteFooter } from '@/components/site/site-footer'
 import { SiteHeader } from '@/components/site/site-header'
 import { profile } from '@/content/profile'
 import './globals.css'
@@ -25,8 +26,14 @@ export const metadata: Metadata = {
     locale: 'en_US',
     title,
     description,
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: title }],
   },
-  twitter: { card: 'summary_large_image', title, description },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: ['/opengraph-image'],
+  },
 }
 
 export const viewport: Viewport = {
@@ -34,9 +41,15 @@ export const viewport: Viewport = {
   colorScheme: 'dark',
 }
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html
+      data-scroll-behavior="smooth"
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+    >
       <body>
         <a href="#main" className="skip-link">
           Skip to content
@@ -45,6 +58,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <main id="main" tabIndex={-1}>
           {children}
         </main>
+        <SiteFooter />
       </body>
     </html>
   )
