@@ -1,128 +1,74 @@
-# Kazys Tatarunas — Portfolio
+# kazys.dev
 
-Personal portfolio of **Kazys Tatarunas**, a Security Developer & Software
-Engineer. A dark, ember-themed single-page site with a right-hand icon
-navigation rail, bilingual content (English / Portuguese), and a working
-contact form — no backend required.
+Personal portfolio of Kazys Tatarunas. A 1-bit, dithered visual identity on top of a
+modern Next.js stack: the hero portrait renders in ordered dithering and the cursor
+works as a lens that reveals the original photo.
 
-🔗 **Live:** [kazys.dev](https://kazys.dev)
+## Stack
 
-Built with **React + TypeScript + Tailwind CSS** on **Vite**, deployed on
-**Vercel**. Dependency-light by design: the only runtime dependencies are React
-and `i18next` — icons, animations, and UI are hand-rolled.
+Next.js 16 (App Router), TypeScript strict, Tailwind CSS 4, Geist and Geist Mono via the
+`geist` package (self-hosted through `next/font/local`, no network call at build time).
 
-## Features
-
-- **Bilingual (EN / pt-BR)** via `react-i18next`, browser-detected and
-  remembered in `localStorage`. All copy lives in two JSON files.
-- **Icon navigation rail** with hover tooltips and scroll-spy active-section
-  highlighting (IntersectionObserver).
-- **Working contact form** through [Web3Forms](https://web3forms.com) — topic
-  chips, honeypot spam trap, and loading / success / error states.
-- **Inline SVG icon set** (lucide-style) — no icon dependency.
-- **Accessible**: semantic landmarks, skip link, focus-visible rings, ARIA on
-  the accordion / language toggle / nav, `<html lang>` kept in sync, and
-  `prefers-reduced-motion` respected.
-
-## Tech stack
-
-| Area      | Tools                                            |
-| --------- | ------------------------------------------------ |
-| Framework | React 18, TypeScript, Vite                       |
-| Styling   | Tailwind CSS, custom CSS layers                  |
-| i18n      | i18next, react-i18next                           |
-| Forms     | Web3Forms                                        |
-| Hosting   | Vercel (custom domain `kazys.dev`)               |
-
-## Getting started
+## Scripts
 
 ```bash
 npm install
-npm run dev      # start the dev server
-npm run build    # type-check + production build
-npm run preview  # preview the production build
-npm run lint     # type-check only (tsc --noEmit)
+npm run dev        # http://localhost:3000
+npm run lint
+npm run typecheck
+npm run build
 ```
 
-### Contact form key
+## Structure
 
-The form posts to Web3Forms, so it needs a free access key. Grab one at
-[web3forms.com](https://web3forms.com) (just enter the email where messages
-should land), then create a local `.env` from the example:
+```
+app/                 layout, page, global tokens (globals.css), icon
+components/layout/   Header, Footer, LocalTime
+components/sections/ Hero, About, Projects, Experience, Education, Stack, Contact
+components/ui/       SectionLabel, ArrowLink, ButtonLink, Value
+components/effects/  DitherImage, DitherShader (WebGL), CursorLens, pointer store
+data/                all copy and structured content
+lib/                 utils, placeholder helpers
+assets/images/       portrait
+```
+
+## Content rules
+
+All copy lives in `data/`. Nothing is invented: missing facts use `todo("...")`, which
+renders as a dashed marker in the UI. Before launch:
 
 ```bash
-cp .env.example .env
-# then set:
-VITE_WEB3FORMS_KEY=your-access-key
+grep -rn "todo(" data/
 ```
 
-Because it's a `VITE_` build-time variable, the same key must be added in
-**Vercel → Project Settings → Environment Variables** for the deployed form to
-work. Without a key the form still renders and validates, but submissions fail
-gracefully and the direct social links keep working.
+## Roadmap
 
-## Deployment
+- [x] Phase 1: structure, tokens, typography, layout
+- [x] Phase 2: hero and DitherImage shader
+- [x] Phase 3: cursor lens
+- [x] Phase 4: project previews and remaining interactions
+- [x] Phase 5: responsive pass
+- [x] Phase 6: performance, accessibility, SEO
+- [x] Phase 7: polish
 
-The site is hosted on Vercel and wired to this repository:
+## Project screenshots
 
-- Pushes to **`main`** deploy to production (`kazys.dev`).
-- Any other branch / PR gets its own **preview deployment** with a unique URL —
-  validate changes there before merging to `main`.
+`assets/projects/` holds real captures of the running frontends (VaultKeeper landing
+page, Network Radar dashboard before a scan, PhishGuard popup before any analysis).
+Replace them with richer captures when available: same 16:10 ratio, then update the
+`image.alt` text in `data/projects.ts`. Projects without a real capture have no image.
 
-Vercel auto-detects the Vite setup; no `vercel.json` is needed.
+## Rendering notes
 
-## Project structure
-
-```
-src/
-├── App.tsx                 # page composition / section order
-├── main.tsx                # React entry (loads i18n)
-├── index.css               # Tailwind layers + shared classes + animations
-├── i18n/
-│   ├── index.ts            # i18next init + language persistence
-│   └── locales/
-│       ├── en.json         # ← all English copy
-│       └── pt.json         # ← all Portuguese (pt-BR) copy
-├── data/
-│   └── content.ts          # structural config (nav, socials, images) + types
-├── assets/                 # portrait, project shots, approach gallery
-└── components/
-    ├── layout/
-    │   ├── Navbar.tsx       # top bar: brand, availability, location, language
-    │   ├── NavRail.tsx      # right-hand icon nav rail + scroll-spy
-    │   └── Footer.tsx       # closing CTA + links + socials
-    ├── sections/
-    │   ├── Hero.tsx         # portrait, name, role, CTAs, social links
-    │   ├── Stats.tsx        # technical metrics
-    │   ├── About.tsx
-    │   ├── FeaturedWork.tsx # Projects (core section) with stack chips
-    │   ├── Services.tsx     # Expertise (security / engineering areas)
-    │   ├── Story.tsx        # Approach + image gallery
-    │   ├── TechStack.tsx    # tech grouped by category
-    │   ├── Brands.tsx       # tools marquee (derived from tech stack)
-    │   ├── WorkProcess.tsx  # security workflow (per-step icons)
-    │   ├── Education.tsx     # Education & Learning
-    │   ├── Faq.tsx
-    │   ├── CtaBanner.tsx
-    │   └── Contact.tsx      # form + topic chips + direct links
-    └── ui/
-        ├── Button.tsx
-        ├── Section.tsx
-        ├── SectionHeading.tsx
-        ├── LanguageSwitcher.tsx
-        ├── SocialLinks.tsx
-        └── Icon.tsx         # inline SVG icons + brand glyphs
-```
-
-## Customizing
-
-- **Copy** — edit `src/i18n/locales/en.json` and `pt.json`. Every visible string
-  lives here; keep both files in sync.
-- **Links & images** — set social URLs, the CV path, project links, and the
-  approach gallery in `src/data/content.ts`.
-- **Theme** — tweak the `ember`, `ink`, and `sand` palettes in
-  `tailwind.config.js`.
-- **Sections** — reorder or add sections in `src/App.tsx`; the nav rail items
-  live in `src/components/layout/NavRail.tsx`.
-- **Add a language** — drop a new JSON file in `src/i18n/locales` and register
-  it in `src/i18n/index.ts`.
+- One WebGL context per dithered image, created only near the viewport and after the
+  main thread is idle. Frames are drawn on demand; an idle page draws nothing.
+- On software WebGL (SwiftShader, llvmpipe, audit browsers) the print-in animation is
+  skipped and DPR is capped at 1, because every frame costs main-thread time there.
+- The grayscale `<img>` stays visible under the canvas; unprinted dots are transparent,
+  so the photo turns into 1-bit instead of popping from an empty frame. Without
+  JavaScript, WebGL, or after a shader error / lost context, the image is all you see
+  (the failure is logged as a structured console warning).
+- "View original" (`RevealToggle`) is the keyboard and touch path to the full image; in
+  fallback mode it removes the grayscale filter.
+- Tone curves per image kind live in `DITHER_TONES`: `photo` for portraits, `interface`
+  for screenshots.
