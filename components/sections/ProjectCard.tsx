@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Project } from "@/data/projects";
 import { RevealToggle } from "@/components/ui/RevealToggle";
 import { ProjectShot } from "./ProjectShot";
@@ -8,12 +8,63 @@ import { ProjectShot } from "./ProjectShot";
 type Props = Pick<Project, "name" | "image" | "sequence"> & { index: number };
 
 export function ProjectCard({ name, image, sequence, index }: Props) {
+  const surfaceRef = useRef<HTMLDivElement>(null);
   const [original, setOriginal] = useState(false);
 
+  useEffect(() => {
+    const surface = surfaceRef.current;
+    if (!surface) return;
+    const enabled = window.matchMedia("(min-width: 768px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)");
+    let frame = 0;
+    let x = 0;
+    let y = 0;
+    let visible = true;
+    const reset = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      surface.style.setProperty("--tilt-x", "0deg");
+      surface.style.setProperty("--tilt-y", "0deg");
+    };
+    const move = (event: PointerEvent) => {
+      if (!enabled.matches || !visible || event.pointerType !== "mouse") return;
+      x = event.clientX;
+      y = event.clientY;
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        // One layout read per frame, on the stationary wrapper rather than the tilted plane.
+        const bounds = surface.getBoundingClientRect();
+        const horizontal = Math.max(-1, Math.min(1, (x - bounds.left) / bounds.width * 2 - 1));
+        const vertical = Math.max(-1, Math.min(1, (y - bounds.top) / bounds.height * 2 - 1));
+        surface.style.setProperty("--tilt-x", `${-vertical * 8}deg`);
+        surface.style.setProperty("--tilt-y", `${horizontal * 8}deg`);
+        frame = 0;
+      });
+    };
+    const visibility = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (!visible) reset();
+    });
+    visibility.observe(surface);
+    surface.addEventListener("pointermove", move);
+    surface.addEventListener("pointerleave", reset);
+    surface.addEventListener("pointercancel", reset);
+    enabled.addEventListener("change", reset);
+    window.addEventListener("blur", reset);
+    return () => {
+      reset();
+      visibility.disconnect();
+      surface.removeEventListener("pointermove", move);
+      surface.removeEventListener("pointerleave", reset);
+      surface.removeEventListener("pointercancel", reset);
+      enabled.removeEventListener("change", reset);
+      window.removeEventListener("blur", reset);
+    };
+  }, []);
 
   return (
     <figure className="project-figure" data-original={original ? "true" : undefined}>
       <div
+        ref={surfaceRef}
         className="project-perspective"
         tabIndex={image ? 0 : undefined}
         role={image ? "group" : undefined}
